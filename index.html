@@ -1,0 +1,2104 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>سامانه جامع آزمون آنلاین تیزهوشان «از من تا خدا» (پایه هشتم) | علی حاجیان</title>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Vazirmatn', 'Inter', 'Tahoma', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              50: '#f0fdfa',
+              100: '#ccfbf1',
+              500: '#14b8a6',
+              600: '#0d9488',
+              700: '#0f766e',
+              800: '#115e59',
+              900: '#0F4C5C',
+              950: '#082f3a',
+            },
+            gold: {
+              400: '#fbbf24',
+              500: '#f59e0b',
+              600: '#d97706',
+              700: '#b45309',
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body {
+      font-family: 'Vazirmatn', 'Inter', Tahoma, sans-serif;
+      background-color: #f8fafc;
+      color: #0f172a;
+      overflow-x: hidden;
+    }
+    .hero-gradient {
+      background: linear-gradient(135deg, #082f3a 0%, #0F4C5C 55%, #115e59 100%);
+    }
+    .card-hover {
+      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .card-hover:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 14px 28px -8px rgba(15, 76, 92, 0.16);
+    }
+    .option-btn {
+      transition: all 0.2s ease;
+    }
+    .option-btn:hover:not(:disabled) {
+      border-color: #0d9488;
+      background-color: #f0fdfa;
+    }
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 9999px;
+    }
+    @keyframes pulseGlow {
+      0%, 100% { opacity: 0.85; transform: scale(1); }
+      50% { opacity: 1; transform: scale(1.03); }
+    }
+    .animate-glow {
+      animation: pulseGlow 3s infinite ease-in-out;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col bg-slate-50 text-slate-800 selection:bg-teal-600 selection:text-white">
+
+  <!-- Top Navigation Bar -->
+  <header class="sticky top-0 z-40 bg-brand-950/95 backdrop-blur-md text-white border-b border-teal-800/50 shadow-md">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-3">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-amber-400 to-amber-600 flex items-center justify-center text-brand-950 font-black text-lg shadow-inner">
+          خ
+        </div>
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="font-extrabold text-base sm:text-lg tracking-tight text-white">سامانه آزمون «از من تا خدا»</span>
+            <span class="hidden md:inline-block text-xs px-2.5 py-0.5 rounded-full bg-amber-500/20 text-amber-300 border border-amber-400/30 font-semibold">ویژه تیزهوشان هشتم</span>
+          </div>
+          <p class="text-xs text-teal-200/80">تهیه و تنظیم: استاد علی حاجیان</p>
+        </div>
+      </div>
+
+      <nav class="flex items-center gap-1.5 sm:gap-2">
+        <button id="nav-dashboard-btn" type="button" class="px-3 py-1.5 rounded-lg text-xs sm:text-sm font-semibold bg-teal-800/70 hover:bg-teal-700 text-white transition flex items-center gap-1.5">
+          <span>🏠</span>
+          <span>بانک آزمون‌ها</span>
+        </button>
+        <button id="nav-comprehensive-btn" type="button" class="px-3 py-1.5 rounded-lg text-xs sm:text-sm font-semibold bg-amber-500 hover:bg-amber-400 text-slate-950 transition flex items-center gap-1.5 shadow-sm">
+          <span>🏆</span>
+          <span>آزمون جامع المپیادی</span>
+        </button>
+        <button id="nav-github-btn" type="button" class="px-3 py-1.5 rounded-lg text-xs sm:text-sm font-semibold bg-slate-800 hover:bg-slate-700 text-teal-200 border border-teal-700/50 transition flex items-center gap-1.5">
+          <span>🚀</span>
+          <span class="hidden sm:inline">انتشار در GitHub</span>
+          <span class="sm:hidden">گیت‌هاب</span>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Toast Notification -->
+  <div id="toast-container" class="fixed bottom-5 left-5 z-50 hidden max-w-sm bg-slate-900 text-white px-4 py-3 rounded-xl shadow-2xl border border-teal-500/40 flex items-center gap-3 text-sm font-medium">
+    <span id="toast-icon" class="text-lg">✅</span>
+    <span id="toast-text">عملیات با موفقیت انجام شد.</span>
+  </div>
+
+  <!-- Main Content Area -->
+  <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
+
+    <!-- ==================== VIEW 1: DASHBOARD ==================== -->
+    <section id="view-dashboard" class="space-y-8">
+      <!-- Hero Banner -->
+      <div class="hero-gradient rounded-3xl p-6 sm:p-8 text-white shadow-xl relative overflow-hidden border border-teal-700/40">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center relative z-10">
+          <div class="lg:col-span-7 space-y-4">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-teal-900/80 border border-teal-500/30 text-teal-200 text-xs font-semibold">
+              <span>✨ منطبق بر چاپ جدید کتاب از من تا خدا (کد ۸۴۱)</span>
+            </div>
+            <h1 class="text-2xl sm:text-3xl lg:text-4xl font-black leading-tight">
+              آزمایشگاه سنجش مفهومی، فقهی و المپیادی <span class="text-amber-400">«از من تا خدا»</span>
+            </h1>
+            <p class="text-teal-100/90 text-sm sm:text-base leading-relaxed text-justify">
+              در این سامانه تعاملی، برای <strong>تک‌تک ۱۱ درس کتاب</strong> آزمون‌های چهارگزینه‌ای استاندارد در سطح مدارس استعدادهای درخشان (تیزهوشان) به همراه <strong>پاسخنامه کاملاً تشریحی</strong> طراحی شده است. ابتدا نام خود را وارد کنید، حالت آزمون را انتخاب نمایید و سطح تسلط خود را در هر درس بسنجید!
+            </p>
+
+            <!-- Student Profile & Exam Mode Controls -->
+            <div class="bg-slate-900/55 backdrop-blur-md p-4 rounded-2xl border border-teal-600/30 grid grid-cols-1 sm:grid-cols-12 gap-3 items-end">
+              <div class="sm:col-span-5">
+                <label for="student-name-input" class="block text-xs text-teal-200 mb-1 font-medium">نام و نام خانوادگی دانش‌آموز:</label>
+                <input id="student-name-input" type="text" placeholder="مثلاً: محمدامین رضایی" class="w-full px-3.5 py-2 rounded-xl bg-slate-950/80 border border-teal-700 text-white placeholder-slate-400 text-sm focus:ring-2 focus:ring-amber-400 focus:outline-none">
+              </div>
+              <div class="sm:col-span-4">
+                <label for="exam-mode-select" class="block text-xs text-teal-200 mb-1 font-medium">شیوه برگزاری آزمون:</label>
+                <select id="exam-mode-select" class="w-full px-3 py-2 rounded-xl bg-slate-950/80 border border-teal-700 text-white text-sm focus:ring-2 focus:ring-amber-400 focus:outline-none">
+                  <option value="practice">آموزشی (بررسی فوری + پاسخ تشریحی)</option>
+                  <option value="exam">آزمونی (زمان‌دار + کارنامه در پایان)</option>
+                </select>
+              </div>
+              <div class="sm:col-span-3">
+                <button id="start-random-comprehensive-btn" type="button" class="w-full py-2 px-3 rounded-xl bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-slate-950 font-extrabold text-xs sm:text-sm shadow-md transition">
+                  ⚡ شروع آزمون جامع (۲۲ تست)
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="lg:col-span-5 flex flex-col items-center">
+            <div class="relative rounded-2xl overflow-hidden border-2 border-amber-400/50 shadow-2xl w-full max-w-md animate-glow">
+              <img src="data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20viewBox%3D%270%200%20800%20450%27%3E%0A%20%20%3Cdefs%3E%0A%20%20%20%20%3ClinearGradient%20id%3D%27bg%27%20x1%3D%270%27%20y1%3D%270%27%20x2%3D%271%27%20y2%3D%271%27%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%270%25%27%20stop-color%3D%27%23041b24%27/%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%2750%25%27%20stop-color%3D%27%230f4c5c%27/%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%27100%25%27%20stop-color%3D%27%23062c30%27/%3E%0A%20%20%20%20%3C/linearGradient%3E%0A%20%20%20%20%3ClinearGradient%20id%3D%27gold%27%20x1%3D%270%27%20y1%3D%271%27%20x2%3D%270%27%20y2%3D%270%27%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%270%25%27%20stop-color%3D%27%23f59e0b%27/%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%27100%25%27%20stop-color%3D%27%23fef08a%27/%3E%0A%20%20%20%20%3C/linearGradient%3E%0A%20%20%3C/defs%3E%0A%20%20%3Crect%20width%3D%27800%27%20height%3D%27450%27%20fill%3D%27url%28%23bg%29%27/%3E%0A%20%20%3Ccircle%20cx%3D%27400%27%20cy%3D%27180%27%20r%3D%27130%27%20fill%3D%27%2314b8a6%27%20opacity%3D%270.18%27/%3E%0A%20%20%3Ccircle%20cx%3D%27400%27%20cy%3D%27180%27%20r%3D%2785%27%20fill%3D%27%23fbbf24%27%20opacity%3D%270.22%27/%3E%0A%20%20%3Cpath%20d%3D%27M260%2C380%20L260%2C180%20A140%2C140%200%200%2C1%20540%2C180%20L540%2C380%27%20fill%3D%27none%27%20stroke%3D%27url%28%23gold%29%27%20stroke-width%3D%278%27/%3E%0A%20%20%3Cpath%20d%3D%27M280%2C380%20L280%2C185%20A120%2C120%200%200%2C1%20520%2C185%20L520%2C380%27%20fill%3D%27none%27%20stroke%3D%27%232dd4bf%27%20stroke-width%3D%272%27%20stroke-dasharray%3D%276%2C6%27/%3E%0A%20%20%3Cpath%20d%3D%27M180%2C450%20Q360%2C350%20380%2C290%20Q400%2C230%20400%2C190%20Q415%2C240%20445%2C295%20Q490%2C360%20640%2C450%20Z%27%20fill%3D%27url%28%23gold%29%27%20opacity%3D%270.75%27/%3E%0A%20%20%3Ccircle%20cx%3D%27400%27%20cy%3D%27140%27%20r%3D%276%27%20fill%3D%27%23fef08a%27/%3E%0A%20%20%3Ccircle%20cx%3D%27350%27%20cy%3D%27110%27%20r%3D%273%27%20fill%3D%27%23ffffff%27%20opacity%3D%270.8%27/%3E%0A%20%20%3Ccircle%20cx%3D%27460%27%20cy%3D%27120%27%20r%3D%274%27%20fill%3D%27%23ffffff%27%20opacity%3D%270.9%27/%3E%0A%20%20%3Ccircle%20cx%3D%27310%27%20cy%3D%27160%27%20r%3D%272.5%27%20fill%3D%27%2399f6e4%27/%3E%0A%20%20%3Ccircle%20cx%3D%27490%27%20cy%3D%27165%27%20r%3D%273%27%20fill%3D%27%23fde68a%27/%3E%0A%3C/svg%3E" alt="سفر معرفتی از من تا خدا" class="w-full h-48 sm:h-56 object-cover">
+              <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent"></div>
+              <div class="absolute bottom-3 right-3 left-3 flex items-center justify-between text-xs text-amber-200 font-semibold">
+                <span>🌟 ۱۱ درس + آزمون جامع المپیادی</span>
+                <span>طراح: علی حاجیان</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Overall Progress Stats Bar -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm flex items-center gap-3.5">
+          <div class="w-12 h-12 rounded-2xl bg-teal-50 text-teal-700 flex items-center justify-center text-2xl font-bold">📚</div>
+          <div>
+            <p class="text-xs text-slate-500 font-medium">تعداد کل آزمون‌ها</p>
+            <p class="text-lg sm:text-xl font-black text-slate-800">۱۲ آزمون تخصصی</p>
+          </div>
+        </div>
+        <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm flex items-center gap-3.5">
+          <div class="w-12 h-12 rounded-2xl bg-amber-50 text-amber-600 flex items-center justify-center text-2xl font-bold">🎯</div>
+          <div>
+            <p class="text-xs text-slate-500 font-medium">بانک سوالات تیزهوشان</p>
+            <p class="text-lg sm:text-xl font-black text-slate-800" id="stat-total-questions">۶۶ سوال تشریحی</p>
+          </div>
+        </div>
+        <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm flex items-center gap-3.5">
+          <div class="w-12 h-12 rounded-2xl bg-emerald-50 text-emerald-600 flex items-center justify-center text-2xl font-bold">✅</div>
+          <div>
+            <p class="text-xs text-slate-500 font-medium">درس‌های تکمیل‌شده شما</p>
+            <p class="text-lg sm:text-xl font-black text-emerald-700" id="stat-completed-lessons">۰ از ۱۲</p>
+          </div>
+        </div>
+        <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm flex items-center gap-3.5">
+          <div class="w-12 h-12 rounded-2xl bg-indigo-50 text-indigo-600 flex items-center justify-center text-2xl font-bold">📊</div>
+          <div>
+            <p class="text-xs text-slate-500 font-medium">میانگین کل تراز شما</p>
+            <p class="text-lg sm:text-xl font-black text-indigo-700" id="stat-average-score">بدون رکورد</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Filter & Search Bar for Lessons -->
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white p-4 rounded-2xl border border-slate-200 shadow-sm">
+        <div class="flex items-center gap-2 flex-wrap">
+          <span class="text-xs font-bold text-slate-500 ml-1">فیلتر بخش‌ها:</span>
+          <button type="button" data-filter="all" class="filter-tab-btn px-3 py-1.5 rounded-xl text-xs font-bold bg-brand-900 text-white transition">همه دروس (۱ تا ۱۱)</button>
+          <button type="button" data-filter="part1" class="filter-tab-btn px-3 py-1.5 rounded-xl text-xs font-bold bg-slate-100 text-slate-700 hover:bg-slate-200 transition">نیم‌سال اول (درس ۱ تا ۶)</button>
+          <button type="button" data-filter="part2" class="filter-tab-btn px-3 py-1.5 rounded-xl text-xs font-bold bg-slate-100 text-slate-700 hover:bg-slate-200 transition">نیم‌سال دوم (درس ۷ تا ۱۱)</button>
+        </div>
+        <div class="flex items-center gap-2">
+          <input id="search-lesson-input" type="text" placeholder="جست‌وجوی نام درس، حکم یا شخصیت..." class="w-full sm:w-64 px-3.5 py-1.5 rounded-xl border border-slate-300 text-xs sm:text-sm focus:ring-2 focus:ring-teal-600 focus:outline-none">
+          <button id="reset-progress-btn" type="button" class="px-3 py-1.5 rounded-xl text-xs font-semibold text-rose-600 bg-rose-50 hover:bg-rose-100 border border-rose-200 transition shrink-0" title="پاک کردن رکوردهای ذخیره‌شده">
+            پاکسازی کارنامه
+          </button>
+        </div>
+      </div>
+
+      <!-- Grid of 11 Lessons + Comprehensive Exam Card -->
+      <div id="lessons-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+        <!-- Populated dynamically via JS -->
+      </div>
+    </section>
+
+    <!-- ==================== VIEW 2: ACTIVE QUIZ ==================== -->
+    <section id="view-quiz" class="hidden max-w-4xl mx-auto space-y-6">
+      <!-- Quiz Header Card -->
+      <div class="bg-white rounded-3xl p-5 sm:p-6 border border-slate-200 shadow-md">
+        <div class="flex flex-wrap items-center justify-between gap-4 pb-4 border-b border-slate-100">
+          <div>
+            <span id="quiz-badge" class="inline-block text-xs font-extrabold px-3 py-1 rounded-full bg-teal-100 text-teal-800 mb-1">درس اول</span>
+            <h2 id="quiz-title" class="text-xl sm:text-2xl font-black text-slate-900">راز شادابی</h2>
+            <p id="quiz-subtitle" class="text-xs text-slate-500 mt-0.5">مفاهیم ایمان، قصه حاج قاسم و احکام وضو</p>
+          </div>
+          <div class="flex items-center gap-3">
+            <div class="bg-slate-100 px-3.5 py-2 rounded-2xl text-center border border-slate-200">
+              <span class="block text-[10px] text-slate-500 font-semibold">زمان باقی‌مانده</span>
+              <span id="quiz-timer" class="font-mono font-black text-base text-brand-900">08:00</span>
+            </div>
+            <button id="quit-quiz-btn" type="button" class="px-3.5 py-2 rounded-xl text-xs font-bold bg-slate-100 hover:bg-rose-50 hover:text-rose-600 text-slate-600 border border-slate-200 transition">
+              انصراف و بازگشت
+            </button>
+          </div>
+        </div>
+
+        <!-- Progress Bar & Question Pills -->
+        <div class="mt-4 space-y-3">
+          <div class="flex items-center justify-between text-xs font-bold text-slate-600">
+            <span id="quiz-progress-label">سوال ۱ از ۶</span>
+            <span id="quiz-answered-count">پاسخ داده شده: ۰</span>
+          </div>
+          <div class="w-full h-2.5 bg-slate-100 rounded-full overflow-hidden">
+            <div id="quiz-progress-bar" class="h-full bg-gradient-to-l from-teal-600 to-amber-500 transition-all duration-300" style="width: 16%"></div>
+          </div>
+          <div id="quiz-question-pills" class="flex items-center gap-1.5 flex-wrap pt-1">
+            <!-- Question number pills -->
+          </div>
+        </div>
+      </div>
+
+      <!-- Question Card -->
+      <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-lg space-y-6">
+        <div class="flex items-center justify-between gap-2">
+          <span id="question-category-tag" class="text-xs font-bold px-3 py-1 rounded-lg bg-amber-50 text-amber-800 border border-amber-200">مفهومی و کلامی</span>
+          <span id="question-difficulty-tag" class="text-xs font-bold px-3 py-1 rounded-lg bg-indigo-50 text-indigo-700">سطح: تیزهوشان</span>
+        </div>
+
+        <h3 id="question-text" class="text-base sm:text-lg font-extrabold text-slate-900 leading-relaxed text-justify">
+          متن سوال در اینجا قرار می‌گیرد...
+        </h3>
+
+        <!-- Options List -->
+        <div id="options-container" class="space-y-3">
+          <!-- Populated dynamically -->
+        </div>
+
+        <!-- Instant Explanation Box (Visible in Practice Mode or Review) -->
+        <div id="instant-explanation-box" class="hidden rounded-2xl p-4 sm:p-5 bg-teal-50/80 border border-teal-200 space-y-2">
+          <div class="flex items-center gap-2 font-extrabold text-sm text-teal-900">
+            <span id="instant-feedback-icon">💡</span>
+            <span id="instant-feedback-title">تحلیل و پاسخ تشریحی استاد علی حاجیان:</span>
+          </div>
+          <p id="instant-explanation-text" class="text-xs sm:text-sm text-slate-700 leading-relaxed text-justify"></p>
+        </div>
+
+        <!-- Quiz Navigation Footer -->
+        <div class="flex items-center justify-between pt-4 border-t border-slate-100">
+          <button id="prev-question-btn" type="button" class="px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold bg-slate-100 hover:bg-slate-200 text-slate-700 disabled:opacity-40 transition">
+            → سوال قبلی
+          </button>
+
+          <div class="flex items-center gap-2">
+            <button id="next-question-btn" type="button" class="px-5 py-2.5 rounded-xl text-xs sm:text-sm font-bold bg-brand-900 hover:bg-brand-800 text-white shadow-sm transition">
+              سوال بعدی ←
+            </button>
+            <button id="finish-quiz-btn" type="button" class="px-5 py-2.5 rounded-xl text-xs sm:text-sm font-extrabold bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-slate-950 shadow-md transition">
+              ثبت نهایی و مشاهده کارنامه 🏆
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== VIEW 3: RESULTS & REPORT CARD ==================== -->
+    <section id="view-results" class="hidden max-w-4xl mx-auto space-y-6">
+      <!-- Report Card Banner -->
+      <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-xl relative overflow-hidden">
+        <div class="absolute top-0 right-0 left-0 h-2 bg-gradient-to-l from-teal-600 via-amber-500 to-teal-800"></div>
+        <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+          <div class="space-y-2 text-center md:text-right">
+            <span class="inline-block text-xs font-bold px-3 py-1 rounded-full bg-teal-50 text-teal-800 border border-teal-200">کارنامه رسمی سنجش تیزهوشان</span>
+            <h2 id="result-exam-title" class="text-2xl sm:text-3xl font-black text-slate-900">کارنامه آزمون درس اول</h2>
+            <p id="result-student-name" class="text-sm font-semibold text-slate-600">دانش‌آموز: پژوهشگر گرامی | طراح آزمون: علی حاجیان</p>
+            <p id="result-rank-badge" class="inline-block mt-2 text-xs sm:text-sm font-extrabold px-4 py-1.5 rounded-xl bg-amber-100 text-amber-900 border border-amber-300">
+              درجه علمی: ممتاز (نخبه تیزهوشان) 🌟
+            </p>
+          </div>
+
+          <!-- Circular Score Display -->
+          <div class="flex items-center gap-6">
+            <div class="w-32 h-32 rounded-full border-8 border-teal-600 bg-teal-50/50 flex flex-col items-center justify-center shadow-inner">
+              <span id="result-score-percent" class="text-3xl font-black text-brand-950">100%</span>
+              <span id="result-score-twenty" class="text-xs font-extrabold text-teal-700 mt-0.5">نمره: ۲۰ از ۲۰</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Breakdown Metrics -->
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mt-6 pt-6 border-t border-slate-100">
+          <div class="bg-emerald-50/70 p-3.5 rounded-2xl border border-emerald-200 text-center">
+            <span class="block text-xs text-emerald-700 font-semibold">پاسخ‌های صحیح</span>
+            <span id="result-correct-count" class="text-xl font-black text-emerald-800">۶</span>
+          </div>
+          <div class="bg-rose-50/70 p-3.5 rounded-2xl border border-rose-200 text-center">
+            <span class="block text-xs text-rose-700 font-semibold">پاسخ‌های نادرست</span>
+            <span id="result-wrong-count" class="text-xl font-black text-rose-800">۰</span>
+          </div>
+          <div class="bg-slate-100 p-3.5 rounded-2xl border border-slate-200 text-center">
+            <span class="block text-xs text-slate-600 font-semibold">نزده / سفید</span>
+            <span id="result-unanswered-count" class="text-xl font-black text-slate-800">۰</span>
+          </div>
+          <div class="bg-amber-50/70 p-3.5 rounded-2xl border border-amber-200 text-center">
+            <span class="block text-xs text-amber-800 font-semibold">زمان صرف‌شده</span>
+            <span id="result-time-spent" class="text-xl font-black text-amber-900">01:24</span>
+          </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="flex flex-wrap items-center justify-between gap-3 mt-6 pt-4 border-t border-slate-100">
+          <div class="flex flex-wrap items-center gap-2">
+            <button id="retry-quiz-btn" type="button" class="px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold bg-brand-900 hover:bg-brand-800 text-white transition">
+              🔄 تکرار مجدد این آزمون
+            </button>
+            <button id="copy-report-btn" type="button" class="px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold bg-amber-500 hover:bg-amber-400 text-slate-950 transition">
+              📋 کپی متن کارنامه (جهت ارسال به دبیر)
+            </button>
+          </div>
+          <button id="back-to-dashboard-btn" type="button" class="px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold bg-slate-100 hover:bg-slate-200 text-slate-700 transition">
+            بازگشت به فهرست تمام دروس ←
+          </button>
+        </div>
+      </div>
+
+      <!-- Full Detailed Answer Key -->
+      <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-md space-y-5">
+        <h3 class="text-lg sm:text-xl font-black text-slate-900 flex items-center gap-2">
+          <span>📖</span>
+          <span>پاسخنامه تشریحی و کالبدشکافی تک‌تک سوالات</span>
+        </h3>
+        <div id="detailed-review-list" class="space-y-4">
+          <!-- Populated dynamically -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== VIEW 4: GITHUB PAGES DEPLOYMENT GUIDE ==================== -->
+    <section id="view-github" class="hidden max-w-4xl mx-auto space-y-6">
+      <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-xl space-y-6">
+        <div class="flex items-center justify-between flex-wrap gap-4 border-b border-slate-100 pb-4">
+          <div>
+            <span class="text-xs font-extrabold px-3 py-1 rounded-full bg-teal-100 text-teal-800">راهنمای انتشار رایگان سایت</span>
+            <h2 class="text-xl sm:text-2xl font-black text-slate-900 mt-1">تبدیل این فایل HTML به یک وب‌سایت آنلاین در GitHub Pages</h2>
+          </div>
+          <button id="close-github-view-btn" type="button" class="px-4 py-2 rounded-xl text-xs font-bold bg-slate-100 hover:bg-slate-200 text-slate-700 transition">
+            بازگشت به آزمون‌ها ←
+          </button>
+        </div>
+
+        <p class="text-sm text-slate-600 leading-relaxed text-justify">
+          این سامانه آزمون به صورت <strong>کاملاً مستقل و تک‌فایلی (Self-Contained Single-File HTML)</strong> مهندسی شده است و هیچ نیازی به سرور یا دیتابیس خارجی ندارد. برای اینکه آن را روی اکانت گیت‌هاب خودتان به یک سایت عمومی (مانند <code class="bg-slate-100 px-1.5 py-0.5 rounded text-teal-800 font-mono text-xs">https://w15800974-debug.github.io/az-man-ta-khoda-quiz/</code>) تبدیل کنید تا هر دانش‌آموزی با لینک مستقیم وارد شود و آزمون بدهد، کافی است از بخش Settings > Pages مخزن گیت‌هاب خود، شاخه <strong>main</strong> را فعال نمایید!
+        </p>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2">
+            <div class="w-8 h-8 rounded-lg bg-brand-900 text-white font-black flex items-center justify-center text-sm">۱</div>
+            <h3 class="font-extrabold text-sm text-slate-900">ساخت مخزن (انجام شد ✅)</h3>
+            <p class="text-xs text-slate-600 leading-relaxed">
+              مخزن عمومی <strong><code class="font-mono text-teal-700">az-man-ta-khoda-quiz</code></strong> در اکانت گیت‌هاب شما ایجاد شده است.
+            </p>
+          </div>
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2">
+            <div class="w-8 h-8 rounded-lg bg-brand-900 text-white font-black flex items-center justify-center text-sm">۲</div>
+            <h3 class="font-extrabold text-sm text-slate-900">آپلود index.html (انجام شد ✅)</h3>
+            <p class="text-xs text-slate-600 leading-relaxed">
+              فایل کامل آزمون با نام <strong><code class="font-mono text-teal-700">index.html</code></strong> در شاخه <strong>main</strong> مخزن شما قرار گرفته است.
+            </p>
+          </div>
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2">
+            <div class="w-8 h-8 rounded-lg bg-brand-900 text-white font-black flex items-center justify-center text-sm">۳</div>
+            <h3 class="font-extrabold text-sm text-slate-900">فعال‌سازی GitHub Pages</h3>
+            <p class="text-xs text-slate-600 leading-relaxed">
+              در مخزن خود به تب <strong>Settings</strong> و سپس بخش <strong>Pages</strong> بروید، زیر قسمت Branch گزینه <strong>main</strong> را انتخاب و Save کنید.
+            </p>
+          </div>
+        </div>
+
+        <div class="bg-slate-900 text-slate-100 p-4 rounded-2xl space-y-2">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-bold text-amber-400">آدرس مخزن و سایت GitHub Pages شما:</span>
+            <button id="copy-git-commands-btn" type="button" class="px-3 py-1 rounded-lg bg-teal-700 hover:bg-teal-600 text-white text-xs font-bold transition">
+              کپی لینک‌ها
+            </button>
+          </div>
+          <pre id="git-commands-block" dir="ltr" class="text-xs font-mono text-teal-200 overflow-x-auto leading-relaxed">Repository: https://github.com/w15800974-debug/az-man-ta-khoda-quiz
+GitHub Pages Live URL: https://w15800974-debug.github.io/az-man-ta-khoda-quiz/</pre>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-slate-900 text-slate-400 py-6 border-t border-slate-800 mt-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs">
+      <p>تمامی حقوق محتوایی و آموزشی متعلق به <strong class="text-white">استاد علی حاجیان</strong> است | منطبق بر کتاب «از من تا خدا» پایه هشتم (چاپ ۱۴۰۵)</p>
+      <p class="text-teal-400 font-semibold">طراحی‌شده در سطح مدارس استعدادهای درخشان (تیزهوشان)</p>
+    </div>
+  </footer>
+
+  <!-- Complete Application Logic & 11-Lesson Question Bank -->
+  <script>
+    const LESSONS_DATA = [
+      {
+        id: 1,
+        part: "part1",
+        badge: "درس اول",
+        title: "راز شادابی",
+        subtitle: "مفهوم ایمان، نشاط همیشگی، قصه سردار سلیمانی و احکام وضو",
+        storyHero: "سردار شهید حاج قاسم سلیمانی (دفاع از اربیل)",
+        fiqhTopic: "فلسفه نماز و وضو، مراحل ۵ گانه وضو، حکم لاک و ناخن مصنوعی",
+        questions: [
+          {
+            category: "مفهومی و قرآنی",
+            difficulty: "تیزهوشان",
+            q: "با وجود اینکه تملیخا و یارانش (اصحاب کهف) مردانی میانسال با موهای جوگندمی بودند، چرا خداوند در آیه ۱۰ سوره کهف از آن‌ها با تعبیر «جوان» (فِتْيَة) یاد کرده است؟",
+            options: [
+              "زیرا پس از بیدار شدن از خواب ۳۰۹ ساله، موهایشان دوباره سیاه شده بود.",
+              "زیرا از نگاه خداوند و طبق کلام امام صادق (ع)، معیار جوانی، ایمان، نشاط، شادابی و انگیزه حرکت در راه حق است.",
+              "زیرا در زمان دقیانوس، به تمام وزیران دربار لقب جوان می‌دادند.",
+              "زیرا سن آن‌ها کمتر از بیست سال بود و فقط به خاطر گردوغبار غار میانسال به نظر می‌رسیدند."
+            ],
+            answer: 1,
+            explanation: "بر اساس روایت امام صادق (ع) در درس اول، اصحاب کهف میانسال بودند ولی خداوند به خاطر ایمانشان (که منشأ نشاط، شادابی و انگیزه دائمی است) آن‌ها را «جوان» نامید. امیرمؤمنان علی (ع) نیز می‌فرمایند: «مؤمن کسالت از او دور شده و نشاطش همیشگی است.»"
+          },
+          {
+            category: "کلامی و استدلالی",
+            difficulty: "تیزهوشان",
+            q: "بر اساس کلام امیرمؤمنان علی (ع) در نقشه مفهومی درس اول، «حقیقت ایمان» از ترکیب کدام سه عنصر شکل می‌گیرد و کدام مثال در کتاب برای تبیین آن به کار رفته است؟",
+            options: [
+              "تفکر در خلقت + نماز اول وقت + روزه‌داری (مثال مراجعه به پزشک)",
+              "اقرار کردن با زبان + شناختن و باور کردن با قلب + عمل کردن به دستورات (مثال فرو نبردن دست در آب جوش)",
+              "پاک بودن دل + محبت به مردم + کسب روزی حلال (مثال ساختن خانه بر شن روان)",
+              "صبر در سختی‌ها + توکل به خدا + دوستی با مؤمنان (مثال نمِ انگشت در برابر دریا)"
+            ],
+            answer: 1,
+            explanation: "امام علی (ع) می‌فرمایند: «ایمان، اقرار کردن با زبان، شناختن با قلب (باور کردن در دل) و عمل کردن است.» بشیر برای توضیح این سه رکن، مثال آب جوش را می‌زند که انسان هم به زبان می‌گوید می‌سوزاند، هم در دل باور دارد و هم در عمل دستش را وارد آب جوش نمی‌کند."
+          },
+          {
+            category: "مناظره و نقد شبهات",
+            difficulty: "المپیادی",
+            q: "هنگامی که فردی برای توجیه پوشش نامناسب خود می‌گوید: «اگر دلت پاک باشد، مهم نیست ظاهرت چطور باشد!»، کدام استدلال منطقی (بخش تلنگر) بطلان سخن او را ثابت می‌کند؟",
+            options: [
+              "ظاهر انسان هیچ ارتباطی به باطن ندارد و فقط برای نظم اجتماعی است.",
+              "دل پاک یعنی پذیرش خدای دانا و مهربان؛ و محال است خدای دانا و مهربان دستوری درباره ظاهر و پوشش بدهد که صلاح و نفع ما در آن نباشد.",
+              "پوشش مناسب تنها برای شناخته شدن مسلمانان از غیرمسلمانان در تاریخ وضع شده است.",
+              "کسی که ظاهرش نامناسب است اصلاً به وجود خالق جهان اعتقاد ندارد."
+            ],
+            answer: 1,
+            explanation: "در بخش تلنگر درس اول، استدلال می‌شود که «دل پاک» یعنی باور داشتن به خدای دانا و مهربان در دل؛ و چون خدای دانا و مهربان هرگز دستوری نمی‌دهد که به صلاح و نفع ما نباشد، لازمه باور قلبی به چنین خدایی، عمل کردن به دستورهای او درباره ظاهر و پوشش است."
+          },
+          {
+            category: "قرآن و اسرار نماز",
+            difficulty: "تیزهوشان",
+            q: "حاج آقای محمدی در پاسخ به میلاد که می‌پرسید «خدا چه نیازی به نماز ما دارد و چرا برای آرامش باید نماز بخوانیم؟»، به ترکیب کدام دو آیه قرآنی استناد کرد؟",
+            options: [
+              "«نماز را به‌پا دار برای یاد کردن من» (طه/۱۴) + «تنها با یاد خداست که دل‌ها آرامش می‌یابد» (رعد/۲۸)",
+              "«قطعاً خداوند از مؤمنان دفاع می‌کند» (حج/۳۸) + «از صبر و نماز کمک بگیرید» (بقره/۴۵)",
+              "«خدا را نه چرت فرا می‌گیرد و نه خواب» (بقره/۲۵۵) + «او با شماست هر جا که باشید» (حدید/۴)",
+              "«آیا گمان کردید شما را بیهوده آفریدیم» (مؤمنون/۱۱۵) + «پروردگار ما پروردگار آسمان‌ها و زمین است» (کهف/۱۴)"
+            ],
+            answer: 0,
+            explanation: "خداوند به نماز ما نیازی ندارد (همان‌طور که معلم به درس خواندن شاگرد نیازی ندارد)؛ بلکه ما به آرامش نیاز داریم و خالق ما فرموده: ۱. نماز را برای یاد من به پا دار (طه/۱۴) و ۲. تنها با یاد خدا دل‌ها آرام می‌گیرد (رعد/۲۸)."
+          },
+          {
+            category: "فقه استدلالی (احکام)",
+            difficulty: "المپیادی",
+            q: "خانم رضایی بر روی چهار انگشت پای راست و چهار انگشت پای چپ خود لاک زده است، اما ناخن‌های دست و انگشت شست هر دو پای او بدون لاک است. حکم «وضو» و «غسل» ایشان چیست؟",
+            options: [
+              "هم وضو و هم غسل ایشان باطل است.",
+              "هم وضو و هم غسل ایشان صحیح است.",
+              "اگر مسح پا را روی همان انگشت شستِ بدون لاک بکشد، وضویش صحیح است؛ اما غسل او باطل است.",
+              "وضوی او باطل است، اما غسل او صحیح است."
+            ],
+            answer: 2,
+            explanation: "طبق بخش احکام درس اول، در وضو اگر لاک فقط روی ناخن‌های پا باشد و یکی از انگشتان پا لاک نداشته باشد و مسح روی همان انگشت انجام شود، وضو صحیح است؛ اما در غسل، هیچ‌کدام از انگشتان دست و پا نباید لاک داشته باشند."
+          },
+          {
+            category: "فقه استدلالی (احکام)",
+            difficulty: "تیزهوشان",
+            q: "کسی که «ناخن مصنوعی» کاشته و برداشتن آن تا پایان وقت نماز ممکن نیست یا سختی غیرقابل تحملی دارد، چه وظیفه‌ای نسبت به نمازهای خود دارد؟",
+            options: [
+              "فقط تیمم می‌کند و نیازی به وضو و قضای نمازها نیست.",
+              "با همان ناخن مصنوعی فقط وضو می‌گیرد و نمازش کاملاً صحیح است.",
+              "باید علاوه بر وضو، تیمم هم بکند و بعد از برداشتن ناخن، بنابر احتیاط واجب قضای نمازها را نیز بخواند.",
+              "تا زمانی که ناخن مصنوعی دارد، نماز از او ساقط است و فقط بعداً قضا می‌کند."
+            ],
+            answer: 2,
+            explanation: "اگر برداشتن ناخن مصنوعی ممکن باشد، وضو با آن باطل است؛ و اگر برداشتن آن تا پایان وقت ممکن نباشد یا مشقت غیرقابل تحملی داشته باشد، باید «جمع بین وضو و تیمم» انجام دهد و پس از برداشتن ناخن، بنابر احتیاط واجب قضای نمازها را نیز بخواند."
+          }
+        ]
+      },
+      {
+        id: 2,
+        part: "part1",
+        badge: "درس دوم",
+        title: "خروج از بن‌بست‌ها",
+        subtitle: "تفاوت خالق و ربّ، تمثیل عقل و پزشک، قصه سلمان فارسی و احکام نیت",
+        storyHero: "سلمان فارسی / روزبه (طی کردن ده درجه ایمان)",
+        fiqhTopic: "رکن بودن نیت، الهی کردن کارهای روزمره، عدول نیت در نماز",
+        questions: [
+          {
+            category: "کلامی و قرآنی",
+            difficulty: "تیزهوشان",
+            q: "بر اساس آیه «إِنَّهُمْ فِتْيَةٌ آمَنُوا بِرَبِّهِمْ» (کهف/۱۳)، راز عزیز شدن اصحاب کهف نزد خدا و رسیدن به مقام «وزارت امام زمان (عج)» در دوران رجعت چیست؟",
+            options: [
+              "آن‌ها خدا را فقط به عنوان «خالق» قبول داشتند و شیوه زندگی را با عقل خودشان تعیین می‌کردند.",
+              "آن‌ها به «ربّ» بودن خدا ایمان آوردند؛ یعنی خدا را صاحب‌اختیار، مربی و برنامه‌ریز زندگی خود دانستند و از دستوراتش اطاعت کردند.",
+              "آن‌ها به مدت سیصد و نه سال در غار به عبادت و شب‌زنده‌داری مشغول بودند.",
+              "آن‌ها توانستند با لشکرکشی نظامی، حکومت دقیانوس را سرنگون کنند."
+            ],
+            answer: 1,
+            explanation: "تفاوت «خالق» و «ربّ» در این است که برخی خدا را فقط آفریننده می‌دانند که انسان را به حال خود رها کرده؛ اما «ربّ» کسی است که با دستورات و برنامه خود (دین)، چگونه زیستن را به انسان می‌آموزد تا به خوشبختی دنیا و آخرت برسد."
+          },
+          {
+            category: "مناظره و استدلال",
+            difficulty: "تیزهوشان",
+            q: "در بخش «تلنگر» درس دوم، برای پاسخ به کسی که می‌گوید «وقتی عقل دارم، چه نیازی به دین دارم؟»، از کدام استدلال استفاده شده است؟",
+            options: [
+              "عقل انسان در امور دنیوی نیز هیچ کارایی ندارد و نباید به آن اعتماد کرد.",
+              "همان‌طور که عقل حکم می‌کند برای درمان جسم به جای آزمون و خطا به «پزشک و نسخه او» مراجعه کنیم، همین عقل حکم می‌کند برای سعادت زندگی به «نسخه خالق دانا (دین)» عمل کنیم.",
+              "دین فقط برای کسانی است که از بهره هوشی و عقلی کافی برخوردار نیستند.",
+              "عقل و دین کاملاً با یکدیگر متضاد هستند و باید یکی را کنار گذاشت."
+            ],
+            answer: 1,
+            explanation: "علم خداوند به مصالح و مفاسد زندگی ما بی‌نهایت بیشتر از خود ماست؛ بنابراین خودِ عقل سلیم به ما فرمان می‌دهد که به جای آزمون و خطای پرخطر در زندگی، به برنامه و نسخه الهی (دین) مراجعه کنیم."
+          },
+          {
+            category: "مفهومی و روایی",
+            difficulty: "تیزهوشان",
+            q: "طبق سخنان تملیخا و حدیث امام صادق (ع)، چرا مؤمن در بن‌بست‌های زندگی هرگز ناامید نمی‌شود و «شرط» باز شدن راه توسط سربازان الهی چیست؟",
+            options: [
+              "زیرا مؤمن هرگز در زندگی با هیچ مشکل و سختی‌ای روبه‌رو نمی‌شود.",
+              "زیرا آنچه در آسمان‌ها و زمین است سرباز خدا هستند (فتح/۷)؛ به شرط آنکه انسان «صبور» باشد، به خدا «اعتماد» کند و به خواست او راضی باشد.",
+              "زیرا مؤمن با ثروت و قدرت مادی خود تمام موانع را بدون نیاز به دعا برمی‌دارد.",
+              "زیرا خداوند به مؤمنان وعده داده که بلافاصله در همان ساعت اول هر خواسته مادی آن‌ها را برآورده کند."
+            ],
+            answer: 1,
+            explanation: "تملیخا تصریح می‌کند که همه عوامل آسمان و زمین گوش‌به‌فرمان و سرباز خدا هستند، اما شرط گشایش بن‌بست‌ها «صبر و اعتماد به خدا» است. امام صادق (ع) می‌فرمایند: «اگر کسی از خدا طلب خیر کند و به خواست او راضی باشد، حتماً خدا خیر را برایش انتخاب می‌کند.»"
+          },
+          {
+            category: "تاریخی و الگوها",
+            difficulty: "تیزهوشان",
+            q: "کدام گزینه درباره سرگذشت «روزبه (سلمان فارسی)» و سه نشانه پیامبر خاتم (ص) که عالم مسیحی به او آموخته بود، کاملاً صحیح است؟",
+            options: [
+              "پذیرفتن صدقه، نپذیرفتن هدیه، و داشتن انگشتر سلیمان؛ و آزادی با پرداخت هزار سکه نقره.",
+              "نپذیرفتن صدقه، پذیرفتن هدیه، و خال نبوت میان دو کتف در سرزمین نخل و خرما؛ و آزادی با کاشت ۳۰۰ نهال نخل به دست پیامبر (ص) و قطعه طلای معجزه‌آسا به وزن ۱۱۲۰ مثقال.",
+              "هجرت به سرزمین شام، شکست دادن لشکر روم، و طی کردن هفت درجه از درجات ایمان.",
+              "زندانی شدن توسط حاکم مدینه و آزادی پس از فتح مکه به دست امیرمؤمنان (ع)."
+            ],
+            answer: 1,
+            explanation: "سلمان فارسی پس از آزمودن هر سه نشانه (نخوردن صدقه، خوردن هدیه، و دیدن خال نبوت میان دو کتف پیامبر ص در مدینه) ایمان آورد و با کمک مسلمانان در تهیه ۳۰۰ نهال که پیامبر (ص) کاشتند و قطعه طلایی به اندازه تخم‌مرغ که دقیقاً ۱۱۲۰ مثقال وزن کشید، آزاد شد."
+          },
+          {
+            category: "فقه استدلالی (احکام)",
+            difficulty: "تیزهوشان",
+            q: "حکم «نیت» در نماز چیست و اگر کسی بخواهد «درس خواندن» یا «کار کردن» روزمره‌اش مانند نماز عبادت محسوب شود، چه باید بکند؟",
+            options: [
+              "نیت مستحب است ولی باید حتماً با صدای بلند گفته شود؛ درس خواندن نیز فقط در صورتی که درباره کتاب دینی باشد عبادت است.",
+              "نیت از «ارکان نماز» است (ترک عمدی یا سهوی آن نماز را باطل می‌کند) ولی به زبان آوردنش لازم نیست؛ و اگر در درس خواندن قصد خدمت به بندگان خدا و جلب رضایت الهی را داشته باشیم، هر صفحه و دقیقه آن عبادت ثبت می‌شود.",
+              "نیت واجب غیررکن است و اگر فراموش شود با سجده سهو جبران می‌گردد.",
+              "نیت فقط مخصوص نمازهای واجب است و در کارهای روزمره معنایی ندارد."
+            ],
+            answer: 1,
+            explanation: "نیت از ارکان نماز است (یعنی قصد انجام عمل برای اجرای فرمان خدا) و نیازی به تلفظ زبانی ندارد. همچنین با دادن «رنگ و نیت الهی» به کارهای مباح (مانند درس خواندن برای خدمت به مردم و رضایت خدا)، تمام لحظات آن عبادت می‌شود."
+          },
+          {
+            category: "فقه استدلالی (احکام)",
+            difficulty: "المپیادی",
+            q: "اگر کسی به نیت «نماز عصر» یا «نماز عشا» مشغول نماز شود و در بین نماز یادش بیاید که نماز ظهر یا مغربش را نخوانده است، وظیفه شرعی او چیست؟",
+            options: [
+              "باید فوراً نماز را بشکند، ابتدا نماز ظهر یا مغرب را بخواند و سپس نماز عصر یا عشا را اقامه کند.",
+              "همان نماز عصر یا عشا را تمام می‌کند و بعداً نماز ظهر یا مغرب را می‌خواند.",
+              "هر جا که یادش آمد، باید بدون شکستن نماز، نیتش را به نماز ظهر یا مغرب برگرداند (عدول کند) و پس از اتمام آن، نماز دیگری به نیت عصر یا عشا بخواند.",
+              "نمازش باطل است و باید کفاره بدهد."
+            ],
+            answer: 2,
+            explanation: "طبق حکم صریح پایان درس دوم، در این حالت نباید نماز را بشکند؛ بلکه در همان نقطه از نماز، نیت خود را به نماز ظهر یا مغرب برمی‌گرداند و پس از تمام کردن آن، نماز عصر یا عشا را می‌خواند."
+          }
+        ]
+      },
+      {
+        id: 3,
+        part: "part1",
+        badge: "درس سوم",
+        title: "تحولی بزرگ",
+        subtitle: "عبادتِ تفکر، پوشالی بودن طاغوت، قصه شهید طیب و سرّ تکبیرةالاحرام",
+        storyHero: "شهید طیب حاج‌رضایی (حرّ نهضت اسلامی)",
+        fiqhTopic: "رکن بودن تکبیرةالاحرام، شرط سکون بدن، و معنای عمیق الله اکبر",
+        questions: [
+          {
+            category: "مفهومی و کلامی",
+            difficulty: "تیزهوشان",
+            q: "چه حادثه‌ای در کاخ دقیانوس جرقه «تفکر» را در ذهن تملیخا روشن کرد و کلام امام صادق (ع) درباره ارزش تفکر چیست؟",
+            options: [
+              "خراب شدن ستون‌های طلای کاخ بر اثر زلزله؛ «تفکر نیمی از ایمان است».",
+              "لرزیدن شدید دقیانوس و افتادن تاج از سرش با شنیدن خبر حمله ارتش دشمن؛ و کلام امام صادق (ع): «لحظه‌ای تفکر، از یک سال عبادت [بدون تفکر] برتر است.»",
+              "مردن پرنده سفید دقیانوس در ظرف گلاب؛ «تفکر کلید گنج‌های بهشت است».",
+              "نصیحت یکی از پیامبران بنی‌اسرائیل در دربار؛ «تفکر بالاترین ذکر زبانی است»."
+            ],
+            answer: 1,
+            explanation: "تملیخا وقتی وحشت دقیانوس و افتادن تاج هفت لؤلؤ او را هنگام خبر حمله دشمن دید، اندیشید که «اگر او خداست، چرا می‌ترسد؟ و چه کسی آسمان را بی‌ستون برافراشته است؟». این تفکر، مسیر زندگی او و یارانش را متحول ساخت."
+          },
+          {
+            category: "تاریخی و تطبیقی",
+            difficulty: "تیزهوشان",
+            q: "کدام گزینه نقطه اشتراک دقیق میان زندگی «شهید طیب حاج‌رضایی» و «تملیخا» را به درستی بیان می‌کند؟",
+            options: [
+              "هر دو از ابتدا در خانواده‌ای روحانی و انقلبی بزرگ شده بودند و هرگز با دربار ارتباطی نداشتند.",
+              "هر دو ابتدا در نزد دستگاه حاکم (دقیانوس / رژیم شاه) جایگاه، ثروت و نفوذ داشتند، اما با بیداری فطرت و شناخت حق، برخلاف جریان رودخانه ایستادند و جان و مال خود را فدای حقیقت و ولایت کردند.",
+              "هر دو پس از علنی کردن ایمان خود، به غار پناه بردند و از شهادت نجات یافتند.",
+              "هر دو در جریان عملیات پنجه عقاب در صحرای طبس به شهادت رسیدند."
+            ],
+            answer: 1,
+            explanation: "طیب حاج‌رضایی نیز مانند تملیخا ابتدا دارای نفوذ و جایگاه نزد شاه بود، اما با ارادت به امام حسین (ع) و شنیدن پیام محبت‌آمیز امام خمینی (ره)، در محرم ۱۳۴۲ عکس‌های امام را در دسته عزاداری بالا برد، در ۱۵ خرداد میدان تره‌بار را تعطیل کرد و زیر شکنجه حاضر نشد به مرجع تقلید تهمت بزند تا در ۱۱ آبان ۱۳۴۲ به شهادت رسید."
+          },
+          {
+            category: "احکام و روایات",
+            difficulty: "تیزهوشان",
+            q: "بر اساس حدیث امام صادق (ع) در بخش احکام درس سوم، معنای دقیق ذکر «اللَّهُ أَكْبَرُ» چیست و در تسبیحات حضرت زهرا (س) چند بار تکرار می‌شود؟",
+            options: [
+              "خدا از خورشید و کهکشان‌ها بزرگ‌تر است (۳۳ مرتبه در تسبیحات).",
+              "خدا بزرگ‌تر از آن است که بشود توصیفش کرد (۳۴ مرتبه الله اکبر، در کنار ۳۳ مرتبه الحمدلله و ۳۳ مرتبه سبحان‌الله).",
+              "خدا تنها خالق آسمان و زمین است (۱۰۰ مرتبه در تسبیحات).",
+              "خدا مهربان‌ترین مهربانان است (۱۰ مرتبه در اذان و اقامه)."
+            ],
+            answer: 1,
+            explanation: "امام صادق (ع) می‌فرمایند: «الله اکبر یعنی خدا بزرگ‌تر از آن است که بشود توصیفش کرد.» (الکافی، ج ۱، ص ۱۱۷). همچنین در تسبیحات حضرت زهرا (س)، ۳۴ بار الله اکبر، ۳۳ بار الحمدلله و ۳۳ بار سبحان‌الله، در اذان ۶ بار و در اقامه ۴ بار الله اکبر می‌گوییم."
+          },
+          {
+            category: "قرآن و اندیشه سیاسی",
+            difficulty: "تیزهوشان",
+            q: "حاج آقای محمدی برای حل اختلاف جوانان مسجد درباره «ایستادگی یا کوتاه آمدن در برابر قدرت‌های زورگوی جهانی»، ذکر «الله اکبر» را به کدام آیه قرآنی پیوند زد؟",
+            options: [
+              "«إِنَّ اللَّهَ يُدَافِعُ عَنِ الَّذِينَ آمَنُوا؛ قطعاً خداوند از کسانی که ایمان آورده‌اند، دفاع می‌کند.» (حج/۳۸)",
+              "«وَهُوَ مَعَكُمْ أَيْنَ مَا كُنْتُمْ؛ و او با شماست هر جا که باشید.» (حدید/۴)",
+              "«فَأَقِمْ وَجْهَكَ لِلدِّينِ حَنِيفًا؛ پس روی خود را با گرایش تمام به حق به سوی این دین کن.» (روم/۳۰)",
+              "«لَا تَأْخُذُهُ سِنَةٌ وَلَا نَوْمٌ؛ خدا را نه چرت فرا می‌گیرد و نه خواب.» (بقره/۲۵۵)"
+            ],
+            answer: 0,
+            explanation: "حاج آقا با استناد به آیه ۳۸ سوره حج (إِنَّ اللَّهَ يُدَافِعُ عَنِ الَّذِينَ آمَنُوا) تبیین کرد که ما ضمن تلاش برای قوی شدن، نباید از تحریم و تهدید قدرت‌های زورگو بترسیم؛ زیرا خدای «الله اکبر» خودش مدافع مؤمنان است (چنان‌که در جنگ دوازده‌روزه و جنگ رمضان نیز یاری خدا آشکار شد)."
+          },
+          {
+            category: "فقه استدلالی (احکام)",
+            difficulty: "المپیادی",
+            q: "در کدام‌یک از موارد زیر، حکم «تکبیرةالاحرام» به درستی بیان شده است؟",
+            options: [
+              "تکبیرةالاحرام واجب غیررکن است؛ بنابراین اگر از روی فراموشی گفته نشود، نماز صحیح است.",
+              "تکبیرةالاحرام رکن نماز است (ترک عمدی یا سهوی آن نماز را باطل می‌کند) و باید در حالتی گفته شود که بدن کاملاً آرام و ساکن است.",
+              "اگر امام جماعت در رکوع باشد، مأموم می‌تواند در حال دویدن به سمت صف، تکبیرةالاحرام را بگوید و نمازش صحیح است.",
+              "گفتن تکبیرةالاحرام فقط در نمازهای صبح و مغرب و عشا واجب است."
+            ],
+            answer: 1,
+            explanation: "تکبیرةالاحرام از ارکان نماز است؛ یعنی اگر عمداً یا سهواً (از روی فراموشی) ترک شود، نماز باطل می‌شود. همچنین شرط صحت آن «آرام بودن بدن» (استقرار) در حین گفتن تکبیر است و گفتن عمدی آن در حال حرکت، نماز را باطل می‌کند."
+          },
+          {
+            category: "سلوک و مناجات",
+            difficulty: "تیزهوشان",
+            q: "در مناجات درس سوم («اللَّهُمَّ وَ أَنْطِقْنِي بِالْهُدَى وَ أَلْهِمْنِي التَّقْوَى...» از دعای مکارم الاخلاق)، ما چه درخواستی از خداوند داریم؟",
+            options: [
+              "ثروت فراوان و پیروزی نظامی بر دشمنان در جنگ‌ها",
+              "گویا شدن زبان به هدایت دیگران، الهام شدن راه پرهیزگاری به دل در دوراهی‌ها، و توفیق انجام پاک‌ترین و پسندیده‌ترین کارها",
+              "طول عمر طولانی در دنیا و بی‌نیازی از پزشک",
+              "فراموش شدن خطاهای دیگران در حق ما"
+            ],
+            answer: 1,
+            explanation: "در این فراز از دعای بیستم صحیفه سجادیه از خدا می‌خواهیم زبان ما را گویای هدایت قرار دهد (تا کسی را گمراه نکنیم)، تقوا را به دلمان الهام کند و ما را به پاک‌ترین (أزکی) و پسندیده‌ترین (أرضی) اعمال موفق بدارد."
+          }
+        ]
+      },
+      {
+        id: 4,
+        part: "part1",
+        badge: "درس چهارم",
+        title: "شجاعت در همراهی",
+        subtitle: "مرز بندگی و خدایی، جمع دوستان الهی، قصه رویان و احکام قیام",
+        storyHero: "شهید دکتر سعید کاظمی آشتیانی (پژوهشگاه رویان)",
+        fiqhTopic: "واجبات قیام، شرایط نماز نشسته، حکم حرکت جزیی در نماز",
+        questions: [
+          {
+            category: "مفهومی و عرفانی",
+            difficulty: "تیزهوشان",
+            q: "بیت معروف نظامی گنجوی «خدایا جهان پادشاهی تو راست / ز ما خدمت آید خدایی تو راست» بیانگر کدام قاعده کلیدی بشیر برای رهایی از ترس و اضطراب است؟",
+            options: [
+              "انسان نباید در امور اجتماعی و علمی هیچ تلاشی انجام دهد و فقط باید دعا کند.",
+              "تفکیک حوزه «وظیفه بندگی» از «کار خدایی»؛ یعنی وظیفه ما فقط انجام دستور خداست و نتیجه و تدبیر امور را باید به خدا بسپاریم و در کار خدا دخالت نکنیم.",
+              "پادشاهان دنیوی نمایندگان خدا بر روی زمین هستند و باید از آن‌ها اطاعت کرد.",
+              "شجاعت فقط در میدان جنگ نظامی معنا پیدا می‌کند."
+            ],
+            answer: 1,
+            explanation: "بشیر توضیح می‌دهد که ریشه اضطراب و ترس از مردم، دخالت کردن در کار خداست. ما کاری جز بندگی نداریم؛ وقتی وظیفه بندگی را انجام دادیم، بقیه کارها و حفظ ما با خداست."
+          },
+          {
+            category: "روایی و تربیتی",
+            difficulty: "تیزهوشان",
+            q: "بر اساس کلام امیرمؤمنان علی (ع) در درس چهارم، «بهترینِ برادران و دوستان» چه کسی است و این موضوع چگونه در کار تملیخا دیده شد؟",
+            options: [
+              "کسی که در همه حال با نظر ما موافق باشد و هرگز به ما تذکر ندهد.",
+              "کسی که به سوی کار خیر بشتابد، تو را نیز به سوی آن بکشاند، به نیکی فرمان دهد و در انجام آن یاری‌ات کند (همان‌گونه که تملیخا دوستان مشرکش را با استدلال به توحید دعوت کرد و جمع دوستانه الهی ساخت).",
+              "کسی که از نظر مالی ثروتمند باشد و در هزینه‌های سفر به ما کمک کند.",
+              "کسی که ما را به هم‌رنگ شدن با جماعت تشویق نماید."
+            ],
+            answer: 1,
+            explanation: "تملیخا به جای اینکه به تنهایی بجنگد یا از تمسخر دوستانش بترسد، با استدلال‌های منطقی با همنشینان خود گفتگو کرد و آن‌ها را به مسیر حق کشاند؛ زیرا داشتن دوست همدل، شجاعت انسان را چند برابر می‌کند."
+          },
+          {
+            category: "الگوهای معاصر",
+            difficulty: "تیزهوشان",
+            q: "راز سه‌گانه برکت عمر ۴۴ ساله شهید دکتر سعید کاظمی آشتیانی (بنیان‌گذار پژوهشگاه رویان) و جمله طلایی سه کلمه‌ای او چه بود؟",
+            options: [
+              "سرمایه مالی زیاد + تحصیل در خارج + حمایت دولت‌ها | «علم بهتر از ثروت»",
+              "تلاش و پشتکار + کار گروهی (همدلی) + توکل به خدا | «نترس خدا باهاته»",
+              "انزوا و تنهایی + کار انفرادی + دوری از مسائل روز | «خواستن توانستن است»",
+              "کمک گرفتن از آزمایشگاه‌های غربی + وام بانکی + تبلیغات رسانه‌ای | «پشتکار رمز پیروزی»"
+            ],
+            answer: 1,
+            explanation: "دکتر سعید کاظمی آشتیانی و همکارانش در شرایط سخت پس از جنگ، با افطاری ساده (۳ خرما و یک تکه نان)، نذر ۱۰ هزار صلوات در بن‌بست‌های علمی و تکیه بر سه اصل «تلاش، کار گروهی و توکل به خدا» رویان را به قله دانش جهان رساندند."
+          },
+          {
+            category: "فقه استدلالی (احکام)",
+            difficulty: "تیزهوشان",
+            q: "در کدام بخش‌های نماز، «ایستادن» (قیام) واجب است؟",
+            options: [
+              "فقط هنگام گفتن تکبیرةالاحرام و سلام نماز",
+              "هنگام گفتن تکبیرةالاحرام، خواندن حمد و سوره، و خواندن تسبیحات اربعه (در رکعت سوم و چهارم)",
+              "هنگام خواندن تشهد، سلام و ذکرهای رکوع",
+              "فقط در رکعت اول و دوم نماز صبح"
+            ],
+            answer: 1,
+            explanation: "طبق بیان حاج آقای محمدی در درس چهارم، واجب است تکبیرةالاحرام، حمد و سوره، و تسبیحات اربعه را در حالت ایستاده (قیام) بخوانیم."
+          },
+          {
+            category: "فقه استدلالی (احکام)",
+            difficulty: "المپیادی",
+            q: "کدام‌یک از افراد زیر از نظر شرعی مجاز است نماز واجب خود را «نشسته» بخواند؟",
+            options: [
+              "ریحانه که برای رسیدن به دورهمی دوستانه عجله دارد.",
+              "مریم که بعد از انجام کارهای روزمره خانه احساس خستگی می‌کند.",
+              "بازیکن فوتبالی که پایش کمی درد می‌کند اما می‌تواند ۵ دقیقه ایستاده با دوستانش در مسجد صحبت کند.",
+              "حسین که پادرد شدید دارد و یا اصلاً نمی‌تواند بایستد و یا پزشک ایستادن را به دلیل ضرر واقعی برای او منع کرده است."
+            ],
+            answer: 3,
+            explanation: "انسان تنها در دو صورت می‌تواند نماز واجب را نشسته بخواند: ۱. اصلاً نتواند بایستد (مانند شکستگی پا)، ۲. اگر هم بتواند بایستد، ایستادن برایش واقعاً ضرر داشته باشد. (البته نمازهای مستحبی را در هر حال می‌توان نشسته خواند)."
+          },
+          {
+            category: "فقه استدلالی (احکام)",
+            difficulty: "تیزهوشان",
+            q: "آیا با کمی جلو یا عقب رفتن و یا به چپ و راست حرکت کردن در بین نماز، نماز باطل می‌شود؟",
+            options: [
+              "بله، هرگونه حرکت پا در نماز مطلقاً نماز را باطل می‌کند.",
+              "خیر، اگر به اندازه‌ای نباشد که از حالت نماز خواندن خارج شود اشکالی ندارد، به شرط آنکه در هنگام حرکت، ذکرهای نماز را نگوید.",
+              "فقط در رکعت سوم و چهارم می‌توان در حین خواندن تسبیحات اربعه راه رفت.",
+              "اگر به سمت چپ حرکت کند باطل است اما به سمت جلو اشکالی ندارد."
+            ],
+            answer: 1,
+            explanation: "حرکت جزیی در نماز به شرط رعایت دو نکته صحیح است: ۱. به اندازه‌ای نباشد که صورت و حالت نماز به هم بخورد، ۲. در حین حرکت هیچ ذکری نگوید (چون ذکر نماز باید در حال سکون و آرامش بدن گفته شود)."
+          }
+        ]
+      },
+      {
+        id: 5,
+        part: "part1",
+        badge: "درس پنجم",
+        title: "در مسیر هدایت و اعتماد به خدا",
+        subtitle: "هجرت، تدبیر غار، قصه تینا ماری (سوره توحید) و قرائت صحیح نماز",
+        storyHero: "خانم تینا ماری / نجمه (هدایت با سوره توحید)",
+        fiqhTopic: "قرائت صحیح نماز (صمد/سمد و لم یولد)، تفاوت رحمان و رحیم، حکم جاهل قاصر",
+        questions: [
+          {
+            category: "قرآنی و کلامی",
+            difficulty: "تیزهوشان",
+            q: "قرار گرفتن چوپانِ خداجو بر سر راه اصحاب کهف و هدایت شدن خانم تینا ماری در تگزاس آمریکا، مصداق کدام وعده تخلف‌ناپذیر قرآن در درس پنجم است؟",
+            options: [
+              "«وَالَّذِينَ جَاهَدُوا فِينَا لَنَهْدِيَنَّهُمْ سُبُلَنَا؛ و آن‌ها که در راه ما تلاش کنند، قطعاً به راه‌های خود هدایتشان خواهیم کرد.» (عنکبوت/۶۹)",
+              "«كَمْ مِنْ فِئَةٍ قَلِيلَةٍ غَلَبَتْ فِئَةً كَثِيرَةً؛ چه بسیار گروه‌های کوچک که بر گروه‌های بزرگ پیروز شدند.» (بقره/۲۴۹)",
+              "«قَالُوا لَا ضَيْرَ إِنَّا إِلَى رَبِّنَا مُنْقَلِبُونَ؛ گفتند مهم نیست، ما به سوی پروردگارمان بازمی‌گردیم.» (شعراء/۵۰)",
+              "«إِنَّ اللَّهَ يُدَافِعُ عَنِ الَّذِينَ آمَنُوا؛ قطعاً خداوند از کسانی که ایمان آورده‌اند دفاع می‌کند.» (حج/۳۸)"
+            ],
+            answer: 0,
+            explanation: "طبق آیه ۶۹ سوره عنکبوت، سنت الهی این است که هرکس در هر جای دنیا صادقانه برای شناخت حقیقت و راه خدا تلاش و مجاهدت کند، خداوند دستش را می‌گیرد و راه‌های هدایت را به او نشان می‌دهد."
+          },
+          {
+            category: "قرآنی و تدبیر الهی",
+            difficulty: "تیزهوشان",
+            q: "بر اساس آیه ۱۷ سوره کهف («وَتَرَى الشَّمْسَ إِذَا طَلَعَتْ تَزَاوَرُ عَنْ كَهْفِهِمْ ذَاتَ الْيَمِينِ...»)، نشانه تدبیر دقیق خداوند برای حفظ سلامتی بدن اصحاب کهف در غار چه بود و معنای صحیح «سپردن تدبیر زندگی به خدا» چیست؟",
+            options: [
+              "تاریک بودن مطلق غار در شبانه‌روز؛ و معنای توکل این است که انسان هیچ فکری و تصمیمی برای زندگی خود نگیرد.",
+              "تمایل نور خورشید به سمت راست غار در طلوع و به سمت چپ در غروب برای دریافت نور کافی؛ و سپردن تدبیر به خدا یعنی فکر کنیم و تصمیم بگیریم اما تصمیم‌هایمان از دایره دستورات دین خدا خارج نباشد.",
+              "باریدن برف در دهانه غار؛ و معنای تدبیر الهی این است که فقط در کارهای عبادی به دین مراجعه کنیم.",
+              "ساخته شدن دیوار سنگی در دهانه غار توسط چوپان؛ و ترک کامل شهر و جامعه برای همیشه."
+            ],
+            answer: 1,
+            explanation: "بشیر تأکید می‌کند که فکر نکردن و تصمیم نگرفتن «تنبلی» است نه توکل! سپردن تدبیر زندگی به خدا یعنی انسان فکر کند و تصمیم بگیرد، اما چون همه مصالح و نیازهای روحی و جسمی خود را نمی‌شناسد، تصمیماتش را کاملاً در چارچوب دستورات دین خدا قرار دهد."
+          },
+          {
+            category: "قرآنی و تطبیقی",
+            difficulty: "المپیادی",
+            q: "در قصه «سوره توحید و یک تحول بزرگ»، خانم تینا ماری (نجمه) پاسخ این دو ابهام خود را که «در تورات گفته شده خدا پس از خلقت خسته شد و استراحت کرد» و «در انجیل عیسی پسر خدا معرفی شده»، به ترتیب در کدام آیات سوره توحید یافت؟",
+            options: [
+              "«قُلْ هُوَ اللَّهُ أَحَدٌ» و «وَلَمْ يَكُنْ لَهُ كُفُوًا أَحَدٌ»",
+              "«اللَّهُ الصَّمَدُ» (خدا به کسی وابسته نیست و همه به او وابسته‌اند) و «لَمْ يَلِدْ وَلَمْ يُولَدْ» (خدا نه زاده شده و نه می‌زاید)",
+              "«بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ» و «قُلْ هُوَ اللَّهُ أَحَدٌ»",
+              "«لَمْ يَلِدْ وَلَمْ يُولَدْ» و «اللَّهُ الصَّمَدُ»"
+            ],
+            answer: 1,
+            explanation: "آیه «اللَّهُ الصَّمَدُ» (بی‌نیازی مطلق خدا و وابستگی همه به او) بطلان خسته شدن و نیاز خدا به استراحت را ثابت کرد، و آیه «لَمْ يَلِدْ وَلَمْ يُولَدْ» ادعای فرزند داشتن خدا (پسر خدا بودن عیسی ع) را باطل نمود."
+          },
+          {
+            category: "اسرار نماز و معارف",
+            difficulty: "تیزهوشان",
+            q: "تفاوت دقیق دو صفت «الرَّحْمن» و «الرَّحِيم» که روزانه در نماز تکرار می‌کنیم، چیست؟",
+            options: [
+              "هیچ تفاوتی ندارند و هر دو فقط برای زیبایی لفظ در کنار هم آمده‌اند.",
+              "«رحمان» مهربانی عمومی خدا در دنیا شامل مؤمن و کافر است (مانند باران)، اما «رحیم» مهربانی ویژه خدا مختص مؤمنان است (ثبت نیت خیر، پاداش ده برابری عمل نیک، و مهلت توبه و بخشش کامل گناه).",
+              "«رحمان» مخصوص قیامت است و «رحیم» مخصوص نعمت‌های مادی در دنیاست.",
+              "«رحمان» یعنی بخشنده گناهان کبیره و «رحیم» یعنی روزی‌دهنده حیوانات."
+            ],
+            answer: 1,
+            explanation: "طبق توضیح حاج آقای محمدی، رحمان رحمت عام الهی است که فرصت رشد و نعمت‌های دنیایی را به مؤمن و کافر می‌دهد؛ اما رحیم رحمت خاص مؤمنان است که حتی برای نیت کار خوب پاداش می‌نویسد و کار نیک را ده برابر پاداش می‌دهد."
+          },
+          {
+            category: "فقه استدلالی (احکام)",
+            difficulty: "تیزهوشان",
+            q: "چرا در قرائت سوره توحید باید مراقب باشیم کلمه «الصَّمَد» را با صدای «س» (سَمَد) تلفظ نکنیم؟",
+            options: [
+              "زیرا «سمد» در زبان عربی هیچ معنایی ندارد و کلمه بی‌معناست.",
+              "زیرا «صمد» به معنای کسی است که مقام بلندی دارد و به کسی محتاج نیست، اما «سمد» در زبان عربی به انسان متکبر یا غافل گفته می‌شود و معنا کاملاً تغییر می‌کند.",
+              "زیرا تلفظ حرف «ص» فقط مستحب است و تاثیری در معنا ندارد.",
+              "زیرا «سمد» نام یکی از بت‌های زمان جاهلیت بوده است."
+            ],
+            answer: 1,
+            explanation: "قرائت صحیح نماز دو رکن دارد: ۱. ادای درست حرکات (مثلاً لَمْ يُولَدْ به فتح لام نه کسر لام) و ۲. تلفظ صحیح حروف عربی؛ زیرا تغییر «صمد» به «سمد» معنا را از «بی‌نیاز بلندمرتبه» به «متکبر یا غافل» تغییر می‌دهد."
+          },
+          {
+            category: "فقه استدلالی (احکام)",
+            difficulty: "المپیادی",
+            q: "پویا تا مدتی کلمه «يُولَدْ» در سوره توحید را «يُولِدْ» می‌خوانده است؛ در حالی که در یادگیری نماز کوتاهی نکرده بود و واقعاً فکر می‌کرد تلفظ صحیح همان است. اکنون که متوجه اشتباه خود شده، تکلیف نمازهای گذشته او چیست؟",
+            options: [
+              "تمام نمازهای گذشته او باطل است و باید همه را قضا کند.",
+              "نمازهای گذشته او صحیح است و نیازی به قضا کردن ندارد (اما برای نمازهای آینده باید تلفظ صحیح را بخواند).",
+              "فقط نمازهای یک ماه اخیر خود را باید دوباره بخواند.",
+              "نمازهایش صحیح است ولی باید برای هر نماز دو سجده سهو به جا آورد."
+            ],
+            answer: 1,
+            explanation: "بر اساس حکم فقهی پایان درس پنجم، اگر نمازگزار در یادگیری کوتاهی نکرده باشد (جاهل قاصر باشد) و گمان می‌کرده تلفظ او صحیح است، نمازهای گذشته‌اش کاملاً صحیح است و نیاز به قضا ندارد."
+          }
+        ]
+      },
+      {
+        id: 6,
+        part: "part1",
+        badge: "درس ششم",
+        title: "نگهبان همیشه بیدار",
+        subtitle: "آیةالکرسی، تاثیر لقمه حلال بر عبادت، قصه طبس و فلسفه زبان عربی در نماز",
+        storyHero: "معجزه صحرای طبس (شکست عملیات پنجه عقاب)",
+        fiqhTopic: "مناظره آیت‌الله رحیم ارباب درباره زبان نماز، حکم بلند و آهسته خواندن نماز",
+        questions: [
+          {
+            category: "قرآنی و مفهومی",
+            difficulty: "تیزهوشان",
+            q: "طبق آیه ۱۸ سوره کهف و آیه ۲۵۵ سوره بقره (آیةالکرسی)، خداوند چگونه در طول ۳۰۹ سال از اصحاب کهف در غار محافظت کرد و کدام عبارت قرآنی بیانگر «بیداری همیشگی خدا» است؟",
+            options: [
+              "فرشتگان با شمشیر جلوی غار ایستادند؛ «وَهُوَ مَعَكُمْ أَيْنَ مَا كُنْتُمْ»",
+              "چشمانشان باز بود، آن‌ها را به راست و چپ می‌گرداند تا بدنشان سالم بماند و در دل لشگریان دقیانوس وحشت انداخت تا فرار کنند؛ «لَا تَأْخُذُهُ سِنَةٌ وَلَا نَوْمٌ» (خدا را نه چرت فرا می‌گیرد و نه خواب).",
+              "دهانه غار با صخره‌ای عظیم مسدود شد؛ «إِنَّ اللَّهَ يُدَافِعُ عَنِ الَّذِينَ آمَنُوا»",
+              "بدن آن‌ها به نور تبدیل شد؛ «اللَّهُ الصَّمَدُ»"
+            ],
+            answer: 1,
+            explanation: "در حالی که اصحاب کهف در خواب عمیق بودند، خدایی که «لَا تَأْخُذُهُ سِنَةٌ وَلَا نَوْمٌ» (نه چرت او را می‌گیرد و نه خواب) بیدار بود؛ هم بدنشان را به چپ و راست می‌گرداند و هم چنان رعبی در دل دشمنان افکند که لشکر دقیانوس از دهانه غار گریختند."
+          },
+          {
+            category: "روایی و اخلاقی",
+            difficulty: "تیزهوشان",
+            q: "تملیخا پس از بیدار شدن از خواب ۳۰۹ ساله، فوراً بر تهیه «غذای حلال» تأکید کرد. پیامبر اکرم (ص) «عبادت همراه با خوردن غذای حرام» را به چه چیزی تشبیه فرموده‌اند و چرا؟",
+            options: [
+              "به درختی که در فصل پاییز برگ‌هایش می‌ریزد؛ چون زیبایی ظاهری ندارد.",
+              "به ساختن خانه‌ای بر روی «شن روان»؛ زیرا همان‌طور که شن روان ثبات ندارد و خانه ساخته شده بر آن فرو می‌ریزد، لقمه حرام نیز پایه و اثر معنوی عبادت را از بین می‌برد.",
+              "به چراغی که نور کمی دارد؛ زیرا فقط به خودش روشنایی می‌دهد.",
+              "به نوشتن بر روی یخ در هوای سرد؛ زیرا تا مدتی باقی می‌ماند."
+            ],
+            answer: 1,
+            explanation: "پیامبر خدا (ص) فرمودند: «عبادتی که همراه با خوردن حرام است، همچون ساختن خانه‌ای بر شن روان است.» (عدة الداعی، ص ۱۵۳). اصحاب کهف هم به حلال بودن غذایشان حساس بودند و هم به حفظ دینشان برای رستگاری ابدی."
+          },
+          {
+            category: "قرآنی و معادباوری",
+            difficulty: "تیزهوشان",
+            q: "بر اساس آیات ۴۵ و ۴۶ سوره بقره («وَاسْتَعِينُوا بِالصَّبْرِ وَالصَّلَاةِ وَإِنَّهَا لَكَبِيرَةٌ إِلَّا عَلَى الْخَاشِعِينَ...»)، معنای «خشوع» چیست و چرا نماز برای خاشعان سنگین و سخت نیست؟",
+            options: [
+              "خشوع یعنی گریه کردن با صدای بلند؛ زیرا آن‌ها فقط نمازهای کوتاه می‌خوانند.",
+              "خشوع یعنی تسلیم بودن قلب در برابر خدا و فرمانش؛ و خاشعان کسانی هستند که یقین دارند پس از مرگ به سوی پروردگارشان بازمی‌گردند و با پاداش او روبه‌رو می‌شوند.",
+              "خشوع یعنی آهسته خواندن تمام ذکرهای نماز؛ زیرا خاشعان در دنیا هیچ مشکلی ندارند.",
+              "خشوع یعنی ترک کردن کار و فعالیت دنیوی و گوشه‌نشینی در مسجد."
+            ],
+            answer: 1,
+            explanation: "آیه ۱۱۵ سوره مؤمنون («أَفَحَسِبْتُمْ أَنَّمَا خَلَقْنَاكُمْ عَبَثًا...») به موضوع «زندگی ابدی و معاد» اشاره دارد. کسی که به بازگشت به سوی خدا ایمان دارد، قلبش در برابر فرمان خدا تسلیم (خاشع) می‌شود و نماز برایش مایه آرامش و لذت است نه بار سنگین."
+          },
+          {
+            category: "تاریخی و معاصر",
+            difficulty: "تیزهوشان",
+            q: "در قصه «طوفانی که مأمور خدا بود»، هدف آمریکا از طراحی عملیات «پنجه عقاب» در صحرای طبس چه بود و چگونه شکست خورد؟",
+            options: [
+              "تصرف چاه‌های نفت جنوب ایران؛ که با حمله جنگنده‌های ارتش ایران شکست خورد.",
+              "آزاد کردن ۵۲ گروگان سفارت آمریکا (تسخیرشده در ۱۳ آبان ۱۳۵۸) و بمباران جماران (خانه امام خمینی ره) با ۸ بالگرد و ۶ هواپیما؛ که با نقص فنی ۳ بالگرد، طوفان شن در طبس و برخورد بالگرد با هواپیما شکست خورد.",
+              "کمک نظامی به ارتش صدام در مرز شلمچه؛ که با بارش شدید باران متوقف شد.",
+              "ترور دانشمندان هسته‌ای ایران؛ که با دستگیری عوامل نفوذی ناکام ماند."
+            ],
+            answer: 1,
+            explanation: "با وجود پیش‌بینی کارشناسان هواشناسی آمریکا مبنی بر صاف بودن آسمان کویر، نقص فنی بالگردها و وزش طوفان شن (به عنوان سرباز خدا) نقشه آمریکا را در صحرای طبس در هم شکست و ۸ تکاور آمریکایی در انفجار کشته شدند."
+          },
+          {
+            category: "مناظره و احکام",
+            difficulty: "المپیادی",
+            q: "آیت‌الله حاج آقا رحیم ارباب در دیدار با نوجوانانی که می‌خواستند نماز را به فارسی بخوانند، با کدام استدلال منطقی نشان داد که حتی «بسم الله الرحمن الرحیم» را نمی‌توان به طور کامل جایگزین متن عربی کرد؟",
+            options: [
+              "زیرا زبان فارسی کلمات کمی دارد و برای شعر گفتن مناسب‌تر است.",
+              "زیرا «الله» اسم خاص خداست و اسم خاص ترجمه نمی‌شود (مثل اسم حسن که نمی‌توان او را زیبا صدا زد)، و کلمات «بخشنده» و «مهربان» نیز معنای دقیق رحمت عامِ «رحمان» و رحمت خاصِ «رحیم» را نمی‌رسانند.",
+              "زیرا اگر نماز را فارسی بخوانیم، زمان نماز خیلی طولانی‌تر می‌شود.",
+              "زیرا فقط علمای دینی اجازه دارند نماز را به زبان فارسی بخوانند."
+            ],
+            answer: 1,
+            explanation: "علاوه بر اینکه عبادت مانند نسخه پزشک است و باید طبق دستور پیامبر (ص) به عربی خوانده شود، آیت‌الله ارباب با ظرافت علمی اثبات کردند که ترجمه‌های فارسی قادر به انتقال تمام بار معنایی اسمای الهی (الله، رحمان، رحیم) نیستند."
+          },
+          {
+            category: "فقه استدلالی (احکام)",
+            difficulty: "المپیادی",
+            q: "در کدام‌یک از موقعیت‌های زیر، حکم «بلند یا آهسته خواندن حمد و سوره در نمازهای صبح، مغرب و عشا» کاملاً درست بیان شده است؟",
+            options: [
+              "امیر که حکم را می‌داند اما از روی خجالت، حمد و سوره نماز مغرب را آهسته می‌خواند: نمازش صحیح است.",
+              "پارسا که از روی فراموشی، حمد و سوره نماز صبح را آهسته می‌خواند: نمازش باطل است.",
+              "نرگس که حمد و سوره نماز مغرب و عشا را آهسته می‌خواند: نمازش صحیح است (چون بلند خواندن تنها بر مردان واجب است)؛ و امیر که عمداً از روی خجالت آهسته خوانده: نمازش باطل است.",
+              "بلند خواندن حمد و سوره در نماز ظهر و عصر بر مردان واجب است."
+            ],
+            answer: 2,
+            explanation: "بلند خواندن حمد و سوره نمازهای صبح، مغرب و عشا تنها بر مردان واجب است؛ پس نماز نرگس صحیح است. در مورد آقایان نیز اگر از روی فراموشی یا ندانستن حکم آهسته بخوانند (مثل پارسا) نماز صحیح است، اما اگر عمداً (حتی از روی خجالت مثل امیر) آهسته بخوانند، نماز باطل است."
+          }
+        ]
+      },
+      {
+        id: 7,
+        part: "part2",
+        badge: "درس هفتم",
+        title: "تا ابد زندگی",
+        subtitle: "مقایسه دنیا و آخرت، صاحب دو باغ، قصه دو درهم بهشتی و احکام رکوع",
+        storyHero: "سعد از اصحاب صفّه (ماجرای دو درهم بهشتی)",
+        fiqhTopic: "رکن بودن رکوع، واجبات رکوع، تفاوت ورزش و نماز، حکم ذکر در حال حرکت",
+        questions: [
+          {
+            category: "روایی و جهان‌بینی",
+            difficulty: "تیزهوشان",
+            q: "پیامبر اکرم (ص) نسبت «دنیا در مقایسه با آخرت» را به چه چیزی تشبیه فرمودند و به ابوذر غفاری چه توصیه‌ای کردند؟",
+            options: [
+              "به قطره باران در برابر ابر؛ «ای ابوذر نسبت به نماز شب حریص‌تر باش».",
+              "به فرو بردن انگشت در دریا و مقدار نمِ باقی‌مانده روی انگشت در برابر دریا؛ «ای ابوذر! نسبت به عمر خویش بخیل‌تر باش تا نسبت به درهم و دینارت (مال و دارایی‌ات)».",
+              "به سایه درخت در روز تابستان؛ «ای ابوذر از تجارت و کسب‌وکار دوری کن».",
+              "به یک روز در برابر یک سال؛ «ای ابوذر ثروت خود را در راه ساخت مسجد انفاق کن»."
+            ],
+            answer: 1,
+            explanation: "وقتی بدانیم کل عمر دنیا در برابر ابدیت آخرت مانند نمِ روی انگشت در برابر اقیانوس است (و طبق آیه ۴۶ نازعات در قیامت گمان می‌کنیم کمتر از یک شب یا روز در دنیا بوده‌ایم)، نسبت به ثانیه‌های عمرمان حساس‌تر و بخیل‌تر از پولمان می‌شویم."
+          },
+          {
+            category: "قرآنی و تحلیلی",
+            difficulty: "تیزهوشان",
+            q: "در داستان قرآنی «صاحب دو باغ» (سوره کهف، آیات ۳۲ تا ۴۴)، ریشه اصلی طغیان صاحب باغ چه بود و دوست مؤمنش به او چه تذکری داد؟",
+            options: [
+              "کم بودن محصول انگور و نخل؛ دوستش گفت باید مالیات باغ را به پادشاه بپردازی.",
+              "غفلت از آخرت، توهم ابدیت در دنیا و فخرفروشی به ثروت و نفرات؛ و دوستش گفت چرا وقتی وارد باغت می‌شوی نمی‌گویی: «مَا شَاءَ اللَّهُ لَا قُوَّةَ إِلَّا بِاللَّهِ» (هرچه خدا خواست همان می‌شود و قدرتی جز قدرت خدا نیست).",
+              "شراکت با دقیانوس؛ دوستش گفت باید باغ را بفروشی و به غار بروی.",
+              "استفاده از آب رودخانه عمومی؛ دوستش گفت باید نیمی از باغ را وقف کنی."
+            ],
+            answer: 1,
+            explanation: "صاحب باغ مغرورانه می‌گفت این باغ همیشه آباد می‌ماند و قیامتی در کار نیست! دوست مؤمنش به او یادآوری کرد که تمام قدرت‌ها از آنِ خداست («مَا شَاءَ اللَّهُ لَا قُوَّةَ إِلَّا بِاللَّهِ») و دیری نگذشت که بلای آسمانی باغ او را نابود ساخت."
+          },
+          {
+            category: "نهج‌البلاغه و تعادل",
+            difficulty: "تیزهوشان",
+            q: "بر اساس حکمت ۱۳۳ نهج‌البلاغه از امیرمؤمنان علی (ع) و توضیحات بشیر، نگاه صحیح اسلام به رابطه «دنیا و آخرت» کدام است؟",
+            options: [
+              "به خاطر آخرت باید کاملاً به دنیا بی‌اعتنا شویم و کار و تلاش را رها کنیم.",
+              "دین نه اجازه می‌دهد به خاطر آخرت به دنیایمان بی‌اعتنا شویم و نه اجازه می‌دهد آخرتمان را فدای دنیا کنیم؛ دنیا محل عبور است نه ماندن، و برنده کسی است که خود را با طاعت حق بخرد و از اسارت غیر خدا آزاد کند.",
+              "ابتدا باید تمام عمر را صرف جمع‌آوری ثروت دنیا کرد و در دوران پیری به فکر آخرت افتاد.",
+              "هرگونه کسب ثروت و تجارت، حتی از راه حلال و با حفظ نماز، در اسلام مذموم است."
+            ],
+            answer: 1,
+            explanation: "در ماجرای «دو درهم بهشتی» نیز مشکلِ سعد اصلِ تجارت نبود، بلکه این بود که دل بستن به دنیا او را از نماز اول وقت به امامت پیامبر (ص) غافل کرد؛ وگرنه کسب‌وکار حلال همراه با اولویت دادن به یاد خدا بسیار پسندیده است."
+          },
+          {
+            category: "مفهومی و کاربردی",
+            difficulty: "تیزهوشان",
+            q: "در سوال ۴ پایان درس هفتم، «ریحانه» چند روز قبل از مسابقه علمی حسابی با دوستش «نازنین» تمرین کرد تا نازنین ناامید نشود. در نهایت نازنین رتبه اول شد، اما ریحانه با اینکه رتبه اول نشد احساس موفقیت و رضایت عمیقی دارد. چرا؟",
+            options: [
+              "چون ریحانه به درس خواندن علاقه‌ای نداشت.",
+              "چون ریحانه با نگاه به «ابدیت و رضایت خدا» به تعریف جدید و درستی از موفقیت و سود رسیده است و یاری رساندن به دوست را پیروزی ابدی می‌داند.",
+              "چون قرار است جایزه مسابقه بین هر دو تقسیم شود.",
+              "چون مسابقه علمی مدرسه اهمیت چندانی در معدل نداشت."
+            ],
+            answer: 1,
+            explanation: "ایمان به ابدیت، معیارهای «سود و زیان» و «موفقیت و شکست» را بازتعریف می‌کند؛ به گونه‌ای که معاینه رایگان بیماران محروم توسط دکتر رضایی یا کمک ریحانه به دوستش، سود و موفقیت حقیقی محسوب می‌شود."
+          },
+          {
+            category: "فقه استدلالی (احکام)",
+            difficulty: "المپیادی",
+            q: "کدام گزینه درباره احکام «رکوع» در نماز کاملاً صحیح است؟",
+            options: [
+              "رکوع واجب غیررکن است و اگر فراموش شود نماز صحیح است.",
+              "رکوع از ارکان نماز است؛ یعنی اگر عمداً یا از روی فراموشی ترک شود و یا در یک رکعت بیشتر از یک رکوع انجام شود، نماز باطل است.",
+              "در رکوع کافی است سر را کمی خم کنیم و رسیدن دست‌ها به زانو لازم نیست.",
+              "بعد از رکوع می‌توان بدون ایستادن کامل، مستقیماً از همان حالت خمیده به سجده رفت."
+            ],
+            answer: 1,
+            explanation: "رکوع رکن نماز است (کم یا زیاد شدن عمدی و سهوی آن نماز را باطل می‌کند). واجب است به اندازه‌ای خم شویم که دست‌ها به زانو برسد، ذکر را در حال آرامش بدن بگوییم، و پس از رکوع کاملاً بایستیم و لحظه‌ای توقف کنیم و سپس به سجده برویم."
+          },
+          {
+            category: "فقه استدلالی (احکام)",
+            difficulty: "المپیادی",
+            q: "حکم نماز در دو موقعیت زیر به ترتیب چیست؟ (موقعیت اول: علی پیش از تمام شدن ذکر رکوع، عمداً بلند می‌شود / موقعیت دوم: حسین از روی فراموشی در حال گفتن ذکر رکوع بلند می‌شود).",
+            options: [
+              "هر دو نماز باطل است.",
+              "هر دو نماز صحیح است.",
+              "نماز علی باطل است، اما نماز حسین (چون از روی فراموشی بوده) صحیح است.",
+              "نماز علی صحیح است، اما نماز حسین باطل است."
+            ],
+            answer: 2,
+            explanation: "آرامش بدن هنگام گفتن ذکر رکوع و سجود واجب (غیررکن) است؛ بنابراین اگر کسی پیش از تمام شدن ذکر، عمداً بلند شود نمازش باطل است، اما اگر از روی فراموشی این کار را انجام دهد، اشکالی ندارد و نمازش صحیح است."
+          }
+        ]
+      },
+      {
+        id: 8,
+        part: "part2",
+        badge: "درس هشتم",
+        title: "میوه شیرین ایمان",
+        subtitle: "صبر جمیل، عاقبت اصحاب کهف، قصه شهید شهریاری و احکام سجده",
+        storyHero: "شهید دکتر مجید شهریاری (مغز متفکر هسته‌ای)",
+        fiqhTopic: "رکن بودن دو سجده، مساجد سبعه (۷ نقطه)، شرایط محل سجده (مُهر)",
+        questions: [
+          {
+            category: "روایی و مفهومی",
+            difficulty: "تیزهوشان",
+            q: "بر اساس کلام امام صادق (ع) در درس هشتم («هرکسی صبر کند، اندکی صبر کرده و هرکسی بی‌تابی کند، اندکی بی‌تابی کرده...»)، چرا تحمل سختی‌های دنیا برای مؤمن آسان می‌شود؟",
+            options: [
+              "چون مؤمن احساس درد و رنج نمی‌کند.",
+              "چون وقتی عمر کوتاه دنیا (مثلاً ۸۰ سال) را با زمان بی‌انتها و ابدیتِ پرنعمت آخرت مقایسه می‌کنیم، می‌فهمیم هر سختی در دنیا بسیار کوتاه و گذراست.",
+              "چون سختی‌های دنیا فقط مخصوص کافران است.",
+              "چون صبر کردن باعث می‌شود انسان در دنیا هرگز بیمار نشود."
+            ],
+            answer: 1,
+            explanation: "یکی از دلایل صبور نبودن ما این است که خیال می‌کنیم سختی‌ها خیلی طول می‌کشد؛ در حالی که سختی‌های دنیا هر اندازه هم طولانی باشند، در برابر بی‌نهایتِ آخرت، بسیار اندک و کوتاه‌اند."
+          },
+          {
+            category: "قرآنی و داستانی",
+            difficulty: "تیزهوشان",
+            q: "وقتی تملیخا پس از ۳۰۹ سال وارد شهر اقسوس شد، چه شعاری روی پرچم شهر دید و چگونه هویت واقعی او برای پادشاه خداپرست (عبدالرحمن) اثبات شد؟",
+            options: [
+              "شعار «نصر من الله و فتح قریب»؛ با نشان دادن انگشتر دقیانوس.",
+              "شعار «لَا إِلَهَ إِلَّا اللَّهُ * عِيسَى رَسُولُ اللَّهِ»؛ با رفتن به خانه قدیمی‌اش و شهادت دادن پیرمردی که نوه و نواده تملیخا پسر قسطین بود.",
+              "شعار «الله اکبر»؛ با شهادت دادن نانوای شهر.",
+              "شعار «ما شاء الله لا قوة الا بالله»؛ با پیدا شدن گنج در غار."
+            ],
+            answer: 1,
+            explanation: "تملیخا ابتدا با دیدن شعار توحیدی بر پرچم شهر و سکه قدیمی نزد نانوا شگفت‌زده شد، سپس پادشاه را به خانه خود (که بلندترین در را داشت) برد و پیرمردِ خانه (نواده تملیخا) شهادت داد که این مرد جدّ من است که از دست دقیانوس فرار کرده بود."
+          },
+          {
+            category: "الگوهای معاصر",
+            difficulty: "تیزهوشان",
+            q: "کدام مجموعه از رفتارهای «شهید دکتر مجید شهریاری» نشان‌دهنده ایمان عمیق او به «ربّ» و عدم غرور علمی است؟",
+            options: [
+              "حل مسئله پیچیده ریاضی در حین وضو، نوشتن «إلهی و ربی من لی غیرک» در حاشیه یادداشت‌ها، خواندن دو رکعت نماز هنگام بن‌بست علمی، بوسیدن دست و پای مادر، احترام به پیک موتوری، و عدم دریافت پول برای غنی‌سازی ۲۰ درصد.",
+              "تحصیل در دانشگاه‌های اروپایی و ثبت اختراعات هسته‌ای به نام شرکت‌های تجاری.",
+              "دریافت میلیاردها تومان پاداش برای محاسبات غنی‌سازی ۲۰ درصد و ساخت آزمایشگاه شخصی.",
+              "قطع ارتباط با دانشجویان برای تمرکز بر مسائل ریاضی."
+            ],
+            answer: 0,
+            explanation: "شهید شهریاری نبوغ خیره‌کننده خود را نعمت خدا می‌دانست، در بن‌بست‌های علمی به نماز و اشک پناه می‌برد، در برابر مادر و حتی پیک موتوری نهایت تواضع را داشت و برای محاسبات حیاتی غنی‌سازی ۲۰ درصد هیچ پولی نپذیرفت."
+          },
+          {
+            category: "فقه استدلالی (احکام)",
+            difficulty: "تیزهوشان",
+            q: "معنای دقیق ذکر سجده «سُبْحَانَ رَبِّيَ الْأَعْلَى وَبِحَمْدِهِ» چیست و چه پیامی برای استکبارستیزی دارد؟",
+            options: [
+              "خداوند آفریننده آسمان‌ها و زمین است؛ پیامی درباره نظم در کارها دارد.",
+              "خدای مالک و تدبیرکننده و بلندمرتبه من از هر عیب و نقصی دور است و من مشغول سپاس و ستایش او هستم؛ و کسی که در برابر عظمت خدا سر به سجده می‌گذارد، هرگز در برابر زورگویی قدرت‌هایی مثل آمریکا تسلیم و خوار نمی‌شود.",
+              "خداوند بخشنده و مهربان است؛ پیام آن مهربانی با همه انسان‌هاست.",
+              "خداوند از رگ گردن به ما نزدیک‌تر است؛ پیام آن دوری از تنهایی است."
+            ],
+            answer: 1,
+            explanation: "درک عظمت پروردگار در سجده، به انسان عزت نفس می‌بخشد تا در برابر عظمت ظاهری زورگویان و دشمنان دین خدا سر خم نکند."
+          },
+          {
+            category: "فقه استدلالی (احکام)",
+            difficulty: "المپیادی",
+            q: "در حال سجده، واجب است چند نقطه از بدن نمازگزار روی زمین قرار بگیرد و حکم رکن بودن سجده چگونه است؟",
+            options: [
+              "پنج نقطه (پیشانی، دو دست و دو زانو)؛ و هر یک سجده به تنهایی رکن است.",
+              "هفت نقطه (پیشانی، دو کف دست، دو سر زانو و دو سر انگشت بزرگ پا)؛ و در هر رکعت «دو سجده با هم» رکن نماز هستند.",
+              "هشت نقطه (به اضافه بینی)؛ و سجده اصلاً رکن نیست.",
+              "هفت نقطه؛ ولی گذاشتن کف دست‌ها روی زمین مستحب است."
+            ],
+            answer: 1,
+            explanation: "در هر رکعت دو سجده داریم که «با هم» رکن نماز هستند. در سجده واجب است ۷ نقطه از بدن روی زمین باشد: پیشانی، دو کف دست، دو سر زانو، و دو سر انگشت بزرگ (شست) پا."
+          },
+          {
+            category: "فقه استدلالی (احکام)",
+            difficulty: "المپیادی",
+            q: "سجده کردن (گذاشتن پیشانی) بر کدام‌یک از دسته‌های زیر به طور کامل «صحیح» است؟",
+            options: [
+              "سنگ، خاک، چوب، برگ درختان",
+              "سنگ، پنبه، گندم، خاک",
+              "چوب، شیشه، آهن، برگ درخت",
+              "خاک، لباس نخی، فرش، طلا"
+            ],
+            answer: 0,
+            explanation: "در سجده، پیشانی باید بر زمین یا گیاهان غیرخوراکی و غیرپوشاکی که از زمین می‌روید گذاشته شود (مانند سنگ، خاک، چوب، برگ درختان). سجده بر خوراکی و پوشاکی (مثل گندم، پنبه، لباس) و چیزهای معدنی غیر از جنس زمین (مثل فلزات، آهن و شیشه) باطل است."
+          }
+        ]
+      },
+      {
+        id: 9,
+        part: "part2",
+        badge: "درس نهم",
+        title: "حضور در ظهور",
+        subtitle: "ندای بقیةالله، ویژگی‌های عصر ظهور، قصه ادواردو آنیلی و احکام تشهد و توسل",
+        storyHero: "شهید ادواردو آنیلی / مهدی (وارث امپراتوری فیات)",
+        fiqhTopic: "تشهد و سلام، سجده سهو، و راه‌های چهارگانه توسل به اهل بیت (ع)",
+        questions: [
+          {
+            category: "مهدویت و روایات",
+            difficulty: "تیزهوشان",
+            q: "هنگام ظهور حضرت ولی‌عصر (عج)، ندای آسمانی آن حضرت با چه عبارتی به گوش جهانیان می‌رسد و معنای لقب «بَقِيَّةُ اللَّهِ» چیست؟",
+            options: [
+              "«من بقیةالله و جانشین خدا روی زمین هستم»؛ و بقیةالله یعنی کسی که خدا او را باقی و ذخیره نگه داشته تا مردم را به سوی حقیقت راهنمایی کند.",
+              "«حی علی خیر العمل»؛ و بقیةالله یعنی آخرین پیامبر الهی.",
+              "«انا المهدی المنتظر»؛ و بقیةالله یعنی کسی که در مسجد کوفه زندگی می‌کند.",
+              "«الله اکبر»؛ و بقیةالله یعنی شمشیر برنده الهی."
+            ],
+            answer: 0,
+            explanation: "طبق روایت کمال‌الدین و بحارالأنوار در درس نهم، امام زمان (عج) با ندای «من بقیةالله و جانشین خدا روی زمین هستم» ظهور می‌کنند و در عصر ظهور، ظلم و فقر و فساد رخت می‌بندد، دانش به اوج می‌رسد و زمین رنگ خدا به خود می‌گیرد."
+          },
+          {
+            category: "الگوهای معاصر",
+            difficulty: "تیزهوشان",
+            q: "چرا «شهید ادواردو آنیلی» (تنها وارث کارخانه‌های فیات، فراری، لامبورگینی و باشگاه یوونتوس ایتالیا) نام «مهدی» را برای خود برگزید و چگونه به شهادت رسید؟",
+            options: [
+              "به دلیل سفر به شهر مشهد؛ و در سانحه رانندگی در رم درگذشت.",
+              "به خاطر عشق به امام زمان (عج) و اینکه خود او نیز از دل ثروت افسانه‌ای به سوی حقیقت «هدایت شده» بود؛ و صهیونیست‌ها که نمی‌خواستند ارث فیات به یک شیعه برسد، پس از بستری کردن اجباری او در تیمارستان، در ۲۵ آبان ۱۳۷۹ او را ربوده و به شهادت رساندند و خودکشی جلوه دادند.",
+              "به پیشنهاد پدرش جیانی آنیلی؛ و در جنگ بوسنی به شهادت رسید.",
+              "به دلیل مطالعه کتاب‌های فلسفه یونان؛ و در زندان ایتالیا مسموم شد."
+            ],
+            answer: 1,
+            explanation: "ادواردو آنیلی پس از یافتن قرآن در کتابخانه دانشگاه و دیدن شجاعت دیپلمات جوان ایرانی در تلویزیون ایتالیا («به نام خداوندِ قوی‌تر از ناوهای آمریکایی»)، شیعه شد، با امام خمینی (ره) دیدار کرد و سرانجام همان‌طور که پیش‌بینی کرده بود توسط عوامل صهیونیست زیر پل رومانو به شهادت رسید."
+          },
+          {
+            category: "معارف و اسرار نماز",
+            difficulty: "تیزهوشان",
+            q: "واجب بودن آوردن نام حضرت محمد (ص) و صلوات بر آل ایشان در کنار نام خدا در «تشهد نماز» چه پیامی دارد و «توسل» به چه معناست؟",
+            options: [
+              "پیامش این است که خدا نماز را بدون یاد پیامبر (ص) و اهل بیتش (ع) قبول نمی‌کند؛ و توسل یعنی به واسطه اهل بیت (ع) که پیش خدا آبرو دارند، به خدا نزدیک شویم.",
+              "پیامش این است که تشهد مهم‌ترین رکن نماز است؛ و توسل یعنی فقط زیارت رفتن در ایام عید.",
+              "پیامش این است که پیامبران نیازمند دعای ما هستند؛ و توسل یعنی کمک خواستن از غیر خدا بدون توجه به خدا.",
+              "پیامش فقط یادآوری تاریخ اسلام است."
+            ],
+            answer: 0,
+            explanation: "راز معنویت شهدا (مانند توسل غواصان عملیات والفجر ۸ به حضرت زهرا س در عبور از اروند خروشان) ارتباط با اهل بیت (ع) بود. راه‌های توسل عبارت‌اند از: ۱. به یاد امام زمان عج بودن، ۲. گوش کردن به حرف ائمه ع، ۳. دعا و صلوات برای اهل بیت ع، ۴. زیارت و مجالس روضه."
+          },
+          {
+            category: "فقه استدلالی (احکام)",
+            difficulty: "تیزهوشان",
+            q: "ذکر واجب «تشهد» در کدام رکعت‌ها خوانده می‌شود و شامل کدام سه بخش است؟",
+            options: [
+              "در همه رکعت‌های نماز؛ شامل تکبیر، حمد و صلوات.",
+              "بعد از سجده دوم در رکعت دوم، و بعد از سجده آخر در نمازهای سه‌رکعتی و چهاررکعتی؛ شامل شهادت به یگانگی خدا (أشهد أن لا إله إلا الله...)، شهادت به رسالت حضرت محمد ص (و أشهد أن محمداً عبده و رسوله) و صلوات بر محمد و آل محمد.",
+              "فقط در رکعت آخر نماز؛ شامل سلام بر پیامبر و سلام بر مؤمنان.",
+              "قبل از رکوع رکعت دوم؛ شامل تسبیحات اربعه و صلوات."
+            ],
+            answer: 1,
+            explanation: "در تشهد (که مستحب است با الحمدلله آغاز شود)، سه جزء واجب است: شهادت به توحید، شهادت به عبودیت و رسالت پیامبر خاتم (ص)، و صلوات بر پیامبر و خاندانش."
+          },
+          {
+            category: "فقه استدلالی (احکام)",
+            difficulty: "المپیادی",
+            q: "اگر کسی در رکعت دوم فراموش کند تشهد را بخواند و به محض اینکه بلند شد (پیش از رفتن به رکوع)، یادش بیاید که تشهد را نخوانده است، وظیفه‌اش چیست؟",
+            options: [
+              "نمازش باطل است و باید از اول بخواند.",
+              "باید بنشیند و تشهد را بخواند، سپس بایستد و نمازش را ادامه دهد و بعد از سلام نماز هم «دو سجده سهو» به جا آورد.",
+              "نباید برگردد، بلکه نماز را ادامه می‌دهد و در پایان یک رکعت نماز احتیاط می‌خواند.",
+              "فقط در دل استغفار می‌کند و نیازی به برگشتن و سجده سهو نیست."
+            ],
+            answer: 1,
+            explanation: "طبق حکم صریح صفحه ۱۲۸ کتاب، در این حالت باید بنشیند، تشهد را بخواند، سپس بایستد و نماز را ادامه دهد و پس از سلام نماز نیز (به خاطر ایستادنِ اضافه) دو سجده سهو به جا آورد."
+          },
+          {
+            category: "فقه استدلالی (احکام)",
+            difficulty: "المپیادی",
+            q: "کیفیت صحیح انجام «سجده سهو» پس از سلام نماز کدام است؟",
+            options: [
+              "یک رکعت نماز نشسته به همراه حمد و سوره می‌خواند.",
+              "پس از سلام نماز، بدون آنکه سر از قبله برگرداند، دو سجده به جا می‌آورد و در هر سجده می‌گوید: «بِسْمِ اللَّهِ وَ بِاللَّهِ اللَّهُمَّ صَلِّ عَلَى مُحَمَّدٍ وَ آلِ مُحَمَّدٍ» و پس از آن تشهد می‌خواند و سلام می‌دهد.",
+              "سه بار تکبیر می‌گوید و یک سجده بدون تشهد انجام می‌دهد.",
+              "دوباره وضو می‌گیرد و تشهد و سلام نماز را تکرار می‌کند."
+            ],
+            answer: 1,
+            explanation: "در سجده سهو، بلافاصله بعد از سلام نماز و بدون برگرداندن سر از قبله، دو سجده با ذکر «بسم الله و بالله اللهم صل علی محمد و آل محمد» به جا می‌آورد، سپس تشهد می‌خواند و با گفتن «السلام علیکم و رحمة الله و برکاته» سلام می‌دهد."
+          }
+        ]
+      },
+      {
+        id: 10,
+        part: "part2",
+        badge: "درس دهم",
+        title: "یقین در مسیر حق",
+        subtitle: "جنگ روانی فرعون، استقامت ساحران، مناظره امام رضا (ع) و طهارت ظاهر و باطن",
+        storyHero: "امام رضا (ع) در مناظره با علمای ادیان + ساحران فرعون",
+        fiqhTopic: "طهارت ظاهر و باطن، حکم خون زخم در نماز، و مراحل غسل ترتیبی",
+        questions: [
+          {
+            category: "جامعه‌شناسی سیاسی و قرآن",
+            difficulty: "تیزهوشان",
+            q: "در جدول «ایستگاه تفکر» درس دهم، کدام گزینه به درستی «ابزارهای باطل برای پنهان کردن حق» را در مقابل «راه‌های شناخت و شناساندن حق» قرار داده است؟",
+            options: [
+              "ابزار باطل: ارائه دلایل منطقی و تحقیق | راه شناخت حق: سکوت و بی‌تفاوتی",
+              "ابزارهای باطل: دروغ‌گویی، شایعه‌سازی، ناامیدسازی، تحریک افکار عمومی، سکوت و بی‌تفاوتی | راه‌های شناخت حق: ارائه دلایل منطقی، تفکر در آیات و روایات، تحقیق و بررسی، مطالعه تاریخ، گفت‌وگو و تبادل نظر.",
+              "ابزارهای باطل: مطالعه تاریخ و مناظره | راه‌های شناخت حق: شایعه‌سازی متقابل",
+              "ابزارهای باطل: فقط زور نظامی | راه‌های شناخت حق: فقط عزلت‌نشینی"
+            ],
+            answer: 1,
+            explanation: "وقتی فرعون و اطرافیانش در برابر معجزه حضرت موسی (ع) کم آوردند، با تهمت «جادوگر بودن» و تحریک افکار عمومی («می‌خواهد شما را از سرزمینتان بیرون کند») جای حق و باطل را عوض کردند؛ ترفندی که تنها با تفکر، تحقیق، تاریخ‌خوانی و استدلال منطقی خنثی می‌شود."
+          },
+          {
+            category: "قرآنی و کلامی",
+            difficulty: "تیزهوشان",
+            q: "با توجه به آیات ۵۰ و ۵۱ سوره شعراء («قَالُوا لَا ضَيْرَ إِنَّا إِلَى رَبِّنَا مُنْقَلِبُونَ...»)، علت آرامش و شجاعت بی‌نظیر ساحران در برابر تهدید فرعون به قطع دست و پا و به صلیب کشیده شدن چه بود؟",
+            options: [
+              "آن‌ها می‌دانستند لشکر بنی‌اسرائیل تا چند دقیقه دیگر کاخ فرعون را فتح می‌کند.",
+              "شناخت یقینی معجزه الهی، ایمان به «ربّ» و توجه به اینکه حکم فرعون فقط در این زندگی کوتاه دنیاست و آن‌ها به سوی پروردگارشان بازمی‌گردند (ایمان به ابدیت و امید به مغفرت الهی).",
+              "آن‌ها با سحر و جادو می‌توانستند طناب‌های دار را پاره کنند.",
+              "فرعون از دوستان قدیمی آن‌ها بود و تهدیدش جدی نبود."
+            ],
+            answer: 1,
+            explanation: "جادوگران که خود استاد فن بودند، یقین یافتند اژدهای موسی (ع) کار خداست؛ لذا با تکیه بر «إِنَّا إِلَى رَبِّنَا مُنْقَلِبُونَ» (ما به سوی پروردگارمان بازمی‌گردیم)، شکوه و آرامشی یافتند که فرعون از آن بی‌بهره بود."
+          },
+          {
+            category: "مناظره و کلام اسلامی",
+            difficulty: "المپیادی",
+            q: "در مجلس مأمون، امام رضا (ع) چگونه با استفاده از «انجیل» ادعای خدایی حضرت عیسی (ع) را نزد عالم مسیحی، و با استفاده از «ملاک معجزه موسی (ع)» انکار نبوت عیسی (ع) و پیامبر اسلام (ص) را نزد عالم یهودی باطل کردند؟",
+            options: [
+              "به عالم مسیحی فرمودند عیسی (ع) کم نماز و روزه می‌خواند و وقتی عالم مسیحی گفت «عیسی همیشه روزه بود و شب‌ها عبادت می‌کرد»، امام پرسیدند: «پس او برای چه کسی نماز و روزه می‌خواند؟!» (اثبات بندگی عیسی ع)؛ و به عالم یهودی فرمودند همان‌طور که معجزات موسی (ع) را با اخبار مطمئن (تواتر) پذیرفته‌اید، معجزات عیسی (ع) و محمد (ص) نیز با اخبار مطمئن ثابت شده است.",
+              "هر دو عالم را به مبارزه عملی دعوت کردند و هیچ گفت‌وگوی علمی صورت نگرفت.",
+              "فقط آیات سوره کهف را برای آن‌ها تلاوت کردند.",
+              "از مأمون خواستند که کتاب‌های آن‌ها را توقیف کند."
+            ],
+            answer: 0,
+            explanation: "شیوه درخشان امام رضا (ع) «مناظره بر پایه مسلّمات و کتاب خودِ طرف مقابل» بود. اقرار عالم مسیحی به عبادت حضرت عیسی (ع)، الوهیت او را باطل کرد؛ و اقرار عالم یهودی به اثبات معجزه از طریق خبر مطمئن، راه بهانه‌جویی درباره معجزات سایر پیامبران را بست."
+          },
+          {
+            category: "اخلاق و اسرار نماز",
+            difficulty: "تیزهوشان",
+            q: "بر اساس سخنان حاج آقای محمدی در درس دهم، «آلودگی باطن» به چیست و راه رسیدن به «طهارت درونی» در نماز کدام است؟",
+            options: [
+              "آلودگی باطن یعنی خستگی جسمی؛ و راه آن خوابیدن قبل از نماز است.",
+              "آلودگی باطن به «گناه» است (ذهن آلوده به سوءظن، چشم و گوش آلوده به حرام، و دل پر از محبت دنیا)؛ و راه طاهر شدن دل، «توبه واقعی» (پشیمانی، طلب بخشش، تصمیم بر ترک گناه و جبران گناهان قابل جبران) است.",
+              "آلودگی باطن یعنی فراموش کردن رکعت‌های نماز؛ و راه آن سجده سهو است.",
+              "طهارت درونی با شستن لباس در آب کر حاصل می‌شود."
+            ],
+            answer: 1,
+            explanation: "همان‌طور که ظاهر انسان با پاک کردن نجاست و وضو/غسل طاهر می‌شود، باطن انسان نیز که با گناهان (سوءظن، نگاه و شنیدن حرام) آلوده شده، باید با «توبه واقعی» پیش از نماز طاهر گردد."
+          },
+          {
+            category: "فقه استدلالی (احکام)",
+            difficulty: "المپیادی",
+            q: "عرفان هنگام کمک به مادرش در آشپزی یا برف‌روبی، دستش کمی می‌بُرد و خونی کمتر از اندازه یک بند انگشت شست خارج می‌شود. در چه صورتی می‌تواند با آن نماز بخواند و در چه صورتی نمی‌تواند؟",
+            options: [
+              "در هیچ صورتی نمی‌تواند نماز بخواند چون هر مقدار خون در نماز باطل‌کننده است.",
+              "اگر خونِ زخم کمتر از یک بند انگشت شست باشد و با آبِ بیرون مخلوط نشده باشد، نماز خواندن با آن ایرادی ندارد؛ اما اگر با آب مخلوط و خیس شود، دیگر نمی‌تواند با آن نماز بخواند (حتی اگر کمتر از بند انگشت شست باشد).",
+              "حتی اگر بیشتر از یک بند انگشت شست باشد، چون خون بدن خودش است اشکالی ندارد.",
+              "فقط در نمازهای مستحبی بخشیده شده است نه در نماز واجب."
+            ],
+            answer: 1,
+            explanation: "طبق توضیح دقیق حاج آقا در صفحه ۱۴۱ کتاب، خون زخم اگر کمتر از یک بند انگشت شست باشد، هرچند نجس است اما در نماز معفوّ (بخشیده‌شده) است؛ مشروط بر اینکه با آب مخلوط نشود."
+          },
+          {
+            category: "فقه استدلالی (احکام)",
+            difficulty: "المپیادی",
+            q: "کدام گزینه درباره «حکم لباس نجس»، «شک در نجاست لباس پاک» و «مراحل غسل ترتیبی» کاملاً صحیح است؟",
+            options: [
+              "اگر بعد از نماز بفهمد لباسش نجس بوده نمازش باطل است | لباس مشکوک نجس است | غسل ترتیبی: شستن پاها سپس سر.",
+              "اگر بعد از نماز بفهمد لباسش نجس بوده، نمازی که خوانده صحیح است | لباسی که پاک بوده تا وقتی یقین به نجس شدنش نداریم پاک است | مراحل غسل ترتیبی: ۱. نیت، ۲. شستن سر و گردن، ۳. شستن سمت راست بدن، ۴. شستن سمت چپ بدن.",
+              "اگر بعد از نماز بفهمد لباسش نجس بوده باید سجده سهو کند | مراحل غسل ترتیبی: ۱. نیت، ۲. شستن سمت چپ، ۳. شستن سر و گردن.",
+              "در غسل ترتیبی نیازی به نیت نیست و فقط فرو رفتن یک‌باره در آب کافی است."
+            ],
+            answer: 1,
+            explanation: "جهل به نجاست لباس که پس از نماز معلوم شود، نماز خوانده‌شده را باطل نمی‌کند. همچنین شک در نجس شدن لباسِ پاک، اعتنا ندارد و پاک محسوب می‌شود. غسل ترتیبی نیز به ترتیب: نیت، سر و گردن، سمت راست و سمت چپ بدن است."
+          }
+        ]
+      },
+      {
+        id: 11,
+        part: "part2",
+        badge: "درس یازدهم",
+        title: "تنهاترین پیروز",
+        subtitle: "تصمیم لحظه‌ای زهیر بن قین، پیروزی اربعین، احکام نماز مسافر و سوره معارج",
+        storyHero: "زهیر بن قین در کربلا و حماسه اربعین",
+        fiqhTopic: "شرایط نماز مسافر (مسافت ۴۱ کیلومتر، ۱۰ روز، حدّ ترخص) و ۵ ویژگی نمازگزار واقعی",
+        questions: [
+          {
+            category: "مفهومی و عاشورایی",
+            difficulty: "تیزهوشان",
+            q: "چرا «زهیر بن قین» ابتدا خیمه‌اش را دور از کاروان امام حسین (ع) می‌زد، چه عاملی او را متحول کرد و بر اساس سخنان بشیر، «پیروزی واقعی» در کربلا و اربعین به چه معناست؟",
+            options: [
+              "زهیر امام را نمی‌شناخت؛ و پیروزی واقعی فقط به معنای غلبه نظامی در همان روز جنگ است.",
+              "زهیر برای فرار از قرار گرفتن در دوراهیِ سخت (گذشتن از ثروت و جان یا نشنیده گرفتن حق) دوری می‌کرد، اما با دعوت فرستاده امام و تشویق همسر باایمانش، تصمیم لحظه‌ای اما ابدی خود را گرفت؛ و پیروزی واقعی یعنی زنده ماندن مکتب در دل میلیون‌ها زائر اربعین که شجاعت «نه گفتن به ظالم» را می‌آموزند.",
+              "زهیر از فرماندهان لشکر کوفه بود و در روز عاشورا توبه کرد.",
+              "زهیر به خاطر بیماری قصد بازگشت به مدینه را داشت."
+            ],
+            answer: 1,
+            explanation: "بشیر تأکید می‌کند که بی‌تفاوتی نسبت به حق و باطل، عذاب اخروی می‌آورد و بعضی تصمیم‌ها که در یک لحظه گرفته می‌شوند (مانند رفتن زهیر به خیمه امام حسین ع)، تکلیف زندگی خود فرد و میلیون‌ها انسان را تا ابد معلوم می‌کنند."
+          },
+          {
+            category: "قرآنی و استقامت",
+            difficulty: "تیزهوشان",
+            q: "آیه شریفه «كَمْ مِنْ فِئَةٍ قَلِيلَةٍ غَلَبَتْ فِئَةً كَثِيرَةً بِإِذْنِ اللَّهِ وَاللَّهُ مَعَ الصَّابِرِينَ» (بقره/۲۴۹) در درس یازدهم، حامل چه پیامی برای مؤمنان است؟",
+            options: [
+              "قدرت نظامی و زیادی نفرات، تنها عامل تعیین‌کننده پیروزی در تاریخ است.",
+              "چه بسیار گروه‌های کوچک و اندک که به خواست و اذن خدا، بر گروه‌های بزرگ پیروز شدند و خداوند با صابران (استقامت‌کنندگان) است.",
+              "مؤمنان نباید در برابر دشمنان پرشمار وارد میدان شوند.",
+              "پیروزی فقط در آخرت اتفاق می‌افتد و در دنیا همیشه باطل پیروز است."
+            ],
+            answer: 1,
+            explanation: "این آیه اثبات می‌کند که کمیِ تعداد یاران جبهه حق (مانند اصحاب کهف، ساحران مؤمن، یاران سیدالشهدا ع و رزمندگان اسلام) مانع پیروزی نیست؛ زیرا اراده خدا با صابران است."
+          },
+          {
+            category: "قرآنی و اسرار نماز",
+            difficulty: "تیزهوشان",
+            q: "بر اساس آیات ۱۹ تا ۳۴ سوره معارج، «پیام اصلی نماز» چیست و کدام پنج ویژگی، سیمای «نمازگزاران واقعی» را از افراد کاهل و بی‌تاب متمایز می‌کند؟",
+            options: [
+              "پیام اصلی نماز ورزش بدن است؛ ویژگی‌ها: خوش‌لباسی، ثروت، سفر زیارتی، بلند خواندن نیت و روزه‌داری.",
+              "پیام اصلی نماز پذیرفتن خدا به عنوان «ربّ» و بندگی او در تمام زندگی است؛ و ۵ ویژگی عبارت‌اند از: ۱. مداومت بر نماز (کاهل‌نماز نبودن)، ۲. اختصاص بخشی از مال برای کمک به نیازمندان، ۳. اعتقاد به روز قیامت، ۴. ترس از عذاب خدا، ۵. پاکدامنی.",
+              "پیام اصلی نماز دوری از مردم است؛ ویژگی‌ها: سکوت، تنهایی، نخوردن گوشت، شب‌زنده‌داری و گریه.",
+              "پیام اصلی نماز فقط حفظ ظاهر اسلامی است."
+            ],
+            answer: 1,
+            explanation: "حاج حسین آقا در جمع‌بندی این ۵ ویژگی در سوره معارج می‌گوید: «این یعنی نماز ستون دین است»؛ زیرا نماز واقعی در اخلاق، انفاق مالی، معادباوری، تقوا و پاکدامنی انسان تجلی می‌یابد."
+          },
+          {
+            category: "فقه استدلالی (احکام)",
+            difficulty: "تیزهوشان",
+            q: "سه شرط اصلی برای «شکسته شدن نماز مسافر» (تبدیل نمازهای چهاررکعتی به دو رکعت) کدام است؟",
+            options: [
+              "مسافت یک‌طرفه ۴۱ کیلومتر + ماندن بیش از ۱۰ روز + گذشتن از عوارضی شهر",
+              "۱. مجموع مسافت رفت و برگشت حدود ۴۱ کیلومتر باشد، ۲. مسافر قصد ماندن کمتر از ۱۰ روز در یک مکان را داشته باشد، ۳. به «حدّ ترخص» برسد (حدود ۱.۵ کیلومتر بعد از شهر که دیوار خانه‌های شهر دیده نشود و اذان شهر شنیده نشود).",
+              "سفر با وسیله نقلیه موتوری + ماندن کمتر از ۳ روز + خارج شدن از استان",
+              "مسافت رفت و برگشت ۱۰۰ کیلومتر + قصد ماندن ۱۰ روز کامل"
+            ],
+            answer: 1,
+            explanation: "طبق بیان حاج آقا در اردوی جهادی (صفحه ۱۵۵ کتاب)، اگر مسافت رفت و برگشت حدود ۴۱ کیلومتر باشد (مثلاً روستایی در ۳۰ کیلومتری که رفت و برگشتش ۶۰ کیلومتر است) و قصد ماندن کمتر از ۱۰ روز باشد، پس از عبور از حدّ ترخص نماز شکسته می‌شود."
+          },
+          {
+            category: "فقه استدلالی (احکام)",
+            difficulty: "المپیادی",
+            q: "حکم نماز را در این سه موقعیت مشخص کنید: ۱. اردوی یک‌روزه مدرسه به اردوگاهی در ۱۰ کیلومتری شهر | ۲. سفر به شهری در ۱۰۰ کیلومتری با قصد اقامت ۱۰ روزه | ۳. خانواده آقای میثمی که قصد سفر یک‌هفته‌ای دارند و در ۱ کیلومتری بیرون شهر برای نماز توقف کرده‌اند.",
+            options: [
+              "هر سه مورد باید نماز را شکسته بخوانند.",
+              "در هر سه موقعیت باید نماز را «کامل» بخوانند (مورد اول به دلیل نرسیدن مسافت رفت‌وبرگشت به ۴۱ کیلومتر؛ مورد دوم به دلیل قصد اقامت ۱۰ روز؛ مورد سوم به دلیل نرسیدن به حدّ ترخص در ۱ کیلومتری شهر).",
+              "مورد اول و دوم کامل، اما مورد سوم شکسته است.",
+              "مورد اول شکسته، اما مورد دوم و سوم کامل است."
+            ],
+            answer: 1,
+            explanation: "این سوال، هر سه شرط نماز مسافر را می‌سنجد: در ۱۰ کیلومتری، مجموع رفت و برگشت ۲۰ کیلومتر است (کمتر از ۴۱ کیلومتر ← کامل)؛ در قصد ۱۰ روز اقامت (کامل)؛ و در فاصله ۱ کیلومتری شهر، چون هنوز به حدّ ترخص (حدود ۱.۵ کیلومتر) نرسیده‌اند، نماز کامل است."
+          },
+          {
+            category: "فقه استدلالی (احکام)",
+            difficulty: "المپیادی",
+            q: "شخصی به مسافرت رفته و قصد کرده ۱۰ روز در مقصدی بماند، اما همان روز اول به خاطر کاری مجبور می‌شود تصمیمش را عوض کند و قبل از ۱۰ روز برگردد. حکم نمازهای او تا زمان بازگشت چیست؟",
+            options: [
+              "در هر صورت باید تمام نمازهایش را شکسته بخواند.",
+              "اگر قبل از منصرف شدن، حداقل «یک نماز چهاررکعتی» کامل خوانده باشد، تا وقتی در مسافرت است باید نمازش را کامل بخواند؛ اما اگر قبل از خواندن یک نماز چهاررکعتی از ماندن منصرف شده باشد، باید نمازش را شکسته بخواند.",
+              "در هر صورت باید تا پایان سفر نمازش را کامل بخواند.",
+              "باید بین نماز شکسته و کامل جمع کند."
+            ],
+            answer: 1,
+            explanation: "طبق مسئله فقهی صفحه ۱۵۷ کتاب، ملاک در انصراف از اقامت ۱۰ روزه، «خواندن یا نخواندنِ یک نماز چهاررکعتی کامل پیش از انصراف» است."
+          }
+        ]
+      }
+    ];
+
+    // Application State
+    let appState = {
+      studentName: "",
+      examMode: "practice", // 'practice' | 'exam'
+      filter: "all",
+      searchQuery: "",
+      activeQuiz: null, // { id, title, subtitle, badge, questions, currentIndex, userAnswers, revealedMap, startTime, timeRemaining, timerInterval }
+      savedProgress: {} // { [lessonId]: { bestPercent, bestScore20, attempts, lastDate } }
+    };
+
+    // Safe LocalStorage Helpers
+    function loadSavedProgress() {
+      try {
+        const raw = localStorage.getItem("az_man_ta_khoda_progress_v1");
+        if (raw) {
+          const parsed = JSON.parse(raw);
+          if (parsed && typeof parsed === "object") {
+            appState.savedProgress = parsed.progress || {};
+            if (parsed.studentName) {
+              appState.studentName = parsed.studentName;
+              const nameInput = document.getElementById("student-name-input");
+              if (nameInput) nameInput.value = parsed.studentName;
+            }
+          }
+        }
+      } catch (e) {
+        // Ignore storage errors in sandboxed environments
+      }
+    }
+
+    function saveProgressToStorage() {
+      try {
+        localStorage.setItem("az_man_ta_khoda_progress_v1", JSON.stringify({
+          studentName: appState.studentName,
+          progress: appState.savedProgress
+        }));
+      } catch (e) {
+        // Ignore storage errors
+      }
+    }
+
+    function showToast(message, icon = "✅") {
+      const container = document.getElementById("toast-container");
+      const textEl = document.getElementById("toast-text");
+      const iconEl = document.getElementById("toast-icon");
+      if (!container || !textEl || !iconEl) return;
+      textEl.textContent = message;
+      iconEl.textContent = icon;
+      container.classList.remove("hidden");
+      if (window._toastTimer) clearTimeout(window._toastTimer);
+      window._toastTimer = setTimeout(() => {
+        container.classList.add("hidden");
+      }, 3200);
+    }
+
+    function switchView(viewName) {
+      const views = ["dashboard", "quiz", "results", "github"];
+      views.forEach(v => {
+        const el = document.getElementById(`view-${v}`);
+        if (el) {
+          if (v === viewName) el.classList.remove("hidden");
+          else el.classList.add("hidden");
+        }
+      });
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    function updateDashboardStats() {
+      const totalQuestions = LESSONS_DATA.reduce((acc, l) => acc + l.questions.length, 0);
+      const statTotalEl = document.getElementById("stat-total-questions");
+      if (statTotalEl) statTotalEl.textContent = `${totalQuestions} سوال تشریحی`;
+
+      const keys = Object.keys(appState.savedProgress);
+      const completedEl = document.getElementById("stat-completed-lessons");
+      if (completedEl) completedEl.textContent = `${keys.length} از ۱۲`;
+
+      const avgEl = document.getElementById("stat-average-score");
+      if (avgEl) {
+        if (keys.length === 0) {
+          avgEl.textContent = "بدون رکورد";
+        } else {
+          const avg = Math.round(keys.reduce((s, k) => s + (appState.savedProgress[k].bestPercent || 0), 0) / keys.length);
+          avgEl.textContent = `${avg}٪ (${(avg / 5).toFixed(1)} از ۲۰)`;
+        }
+      }
+    }
+
+    function renderLessonsGrid() {
+      const grid = document.getElementById("lessons-grid");
+      if (!grid) return;
+
+      const q = appState.searchQuery.trim().toLowerCase();
+      const filtered = LESSONS_DATA.filter(lesson => {
+        const matchesPart = appState.filter === "all" || lesson.part === appState.filter;
+        const matchesSearch = !q ||
+          lesson.title.toLowerCase().includes(q) ||
+          lesson.subtitle.toLowerCase().includes(q) ||
+          lesson.storyHero.toLowerCase().includes(q) ||
+          lesson.fiqhTopic.toLowerCase().includes(q) ||
+          lesson.badge.toLowerCase().includes(q);
+        return matchesPart && matchesSearch;
+      });
+
+      let html = "";
+
+      filtered.forEach(lesson => {
+        const rec = appState.savedProgress[`lesson_${lesson.id}`];
+        const statusBadge = rec
+          ? `<span class="text-xs font-extrabold px-2.5 py-1 rounded-lg bg-emerald-100 text-emerald-800 border border-emerald-300">بهترین رکورد: ${rec.bestPercent}٪ (${rec.bestScore20} از ۲۰)</span>`
+          : `<span class="text-xs font-semibold px-2.5 py-1 rounded-lg bg-slate-100 text-slate-500">آزمون داده نشده</span>`;
+
+        html += `
+          <div class="bg-white rounded-3xl p-5 sm:p-6 border border-slate-200 shadow-sm card-hover flex flex-col justify-between space-y-4">
+            <div class="space-y-3">
+              <div class="flex items-center justify-between gap-2">
+                <span class="text-xs font-black px-3 py-1 rounded-full bg-brand-900 text-white">${lesson.badge}</span>
+                ${statusBadge}
+              </div>
+              <h3 class="text-lg sm:text-xl font-black text-slate-900">${lesson.title}</h3>
+              <p class="text-xs text-slate-600 leading-relaxed">${lesson.subtitle}</p>
+              <div class="pt-2 space-y-1.5 text-xs bg-slate-50 p-3 rounded-2xl border border-slate-100">
+                <p class="text-slate-700"><strong class="text-teal-800">🌟 الگوی درس:</strong> ${lesson.storyHero}</p>
+                <p class="text-slate-700"><strong class="text-amber-800">⚖️ محور احکام:</strong> ${lesson.fiqhTopic}</p>
+              </div>
+            </div>
+
+            <div class="pt-2 flex items-center justify-between gap-2 border-t border-slate-100">
+              <span class="text-xs font-bold text-slate-500">📋 ${lesson.questions.length} تست مفهومی و فقهی</span>
+              <button type="button" data-start-lesson="${lesson.id}" class="px-4 py-2 rounded-xl bg-teal-700 hover:bg-teal-600 text-white font-extrabold text-xs sm:text-sm shadow-sm transition">
+                شروع آزمون ${lesson.badge} ←
+              </button>
+            </div>
+          </div>
+        `;
+      });
+
+      // Add Comprehensive Olympiad Exam Card at the end if 'all' filter is active
+      if (appState.filter === "all" && !q) {
+        const compRec = appState.savedProgress["comprehensive"];
+        const compBadge = compRec
+          ? `<span class="text-xs font-extrabold px-2.5 py-1 rounded-lg bg-amber-300 text-slate-950">رکورد شما: ${compRec.bestPercent}٪ (${compRec.bestScore20} از ۲۰)</span>`
+          : `<span class="text-xs font-bold px-2.5 py-1 rounded-lg bg-amber-500/20 text-amber-200 border border-amber-400/30">ویژه جمع‌بندی کل کتاب</span>`;
+
+        html += `
+          <div class="hero-gradient rounded-3xl p-5 sm:p-6 border-2 border-amber-400/60 shadow-lg card-hover flex flex-col justify-between space-y-4 text-white">
+            <div class="space-y-3">
+              <div class="flex items-center justify-between gap-2">
+                <span class="text-xs font-black px-3 py-1 rounded-full bg-amber-400 text-slate-950">🏆 آزمون جامع المپیادی</span>
+                ${compBadge}
+              </div>
+              <h3 class="text-lg sm:text-xl font-black text-white">آزمون جامع تیزهوشان (کل ۱۱ درس)</h3>
+              <p class="text-xs text-teal-100 leading-relaxed">
+                منتخب ۲۲ سوال ترکیبی، استدلالی و فقهی از تمامی دروس کتاب «از من تا خدا» (۲ سوال از هر درس) برای شبیه‌سازی کامل آزمون پایانی و المپیاد.
+              </p>
+              <div class="pt-2 space-y-1.5 text-xs bg-slate-950/50 p-3 rounded-2xl border border-teal-600/30">
+                <p class="text-amber-200">⏱️ زمان پیشنهادی: ۲۵ دقیقه</p>
+                <p class="text-teal-200">📊 همراه با صدور کارنامه تراز و پاسخنامه تشریحی</p>
+              </div>
+            </div>
+
+            <div class="pt-2 flex items-center justify-between gap-2 border-t border-teal-700/50">
+              <span class="text-xs font-bold text-amber-300">🔥 ۲۲ تست منتخب</span>
+              <button type="button" data-start-comprehensive="true" class="px-4 py-2 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 font-black text-xs sm:text-sm shadow-md transition">
+                شروع آزمون جامع ←
+              </button>
+            </div>
+          </div>
+        `;
+      }
+
+      if (!html) {
+        html = `
+          <div class="col-span-full bg-white rounded-3xl p-8 text-center border border-slate-200">
+            <p class="text-base font-bold text-slate-600">موردی مطابق با عبارت جست‌وجو شده یافت نشد.</p>
+          </div>
+        `;
+      }
+
+      grid.innerHTML = html;
+
+      // Wire buttons inside grid
+      grid.querySelectorAll("[data-start-lesson]").forEach(btn => {
+        btn.addEventListener("click", () => {
+          const id = parseInt(btn.getAttribute("data-start-lesson"), 10);
+          startLessonQuiz(id);
+        });
+      });
+      grid.querySelectorAll("[data-start-comprehensive]").forEach(btn => {
+        btn.addEventListener("click", () => {
+          startComprehensiveQuiz();
+        });
+      });
+    }
+
+    function syncStudentSettingsFromInputs() {
+      const nameInput = document.getElementById("student-name-input");
+      const modeSelect = document.getElementById("exam-mode-select");
+      if (nameInput) appState.studentName = nameInput.value.trim();
+      if (modeSelect) appState.examMode = modeSelect.value;
+      saveProgressToStorage();
+    }
+
+    function startLessonQuiz(lessonId) {
+      syncStudentSettingsFromInputs();
+      const lesson = LESSONS_DATA.find(l => l.id === lessonId);
+      if (!lesson) return;
+
+      const questionsCopy = lesson.questions.map(q => ({ ...q }));
+      initActiveQuiz({
+        key: `lesson_${lesson.id}`,
+        badge: lesson.badge,
+        title: `آزمون ${lesson.badge}: ${lesson.title}`,
+        subtitle: lesson.subtitle,
+        questions: questionsCopy,
+        durationSeconds: questionsCopy.length * 90 // 1.5 min per question
+      });
+    }
+
+    function startComprehensiveQuiz() {
+      syncStudentSettingsFromInputs();
+      // Select 2 questions from each of the 11 lessons (22 questions total)
+      let combined = [];
+      LESSONS_DATA.forEach(lesson => {
+        const pool = [...lesson.questions];
+        // Pick first conceptual and one fiqh/reasoning question
+        if (pool.length >= 2) {
+          combined.push({ ...pool[0], badgeRef: lesson.badge });
+          combined.push({ ...pool[pool.length - 1], badgeRef: lesson.badge });
+        }
+      });
+
+      initActiveQuiz({
+        key: "comprehensive",
+        badge: "آزمون جامع کل کتاب",
+        title: "آزمون جامع المپیادی «از من تا خدا» (درس ۱ تا ۱۱)",
+        subtitle: "شامل ۲۲ سوال مفهومی، کلامی، تاریخی و فقه استدلالی از تمام فصول کتاب",
+        questions: combined,
+        durationSeconds: 22 * 70
+      });
+    }
+
+    function clearQuizTimer() {
+      if (appState.activeQuiz && appState.activeQuiz.timerInterval) {
+        clearInterval(appState.activeQuiz.timerInterval);
+        appState.activeQuiz.timerInterval = null;
+      }
+    }
+
+    function formatTime(sec) {
+      const m = Math.floor(sec / 60);
+      const s = sec % 60;
+      return `${String(m).padStart(2, "0")}:${String(s).padStart(2, "0")}`;
+    }
+
+    function initActiveQuiz(config) {
+      clearQuizTimer();
+      appState.activeQuiz = {
+        key: config.key,
+        badge: config.badge,
+        title: config.title,
+        subtitle: config.subtitle,
+        questions: config.questions,
+        currentIndex: 0,
+        userAnswers: new Array(config.questions.length).fill(null),
+        revealedMap: new Array(config.questions.length).fill(false),
+        durationSeconds: config.durationSeconds,
+        timeRemaining: config.durationSeconds,
+        timerInterval: null
+      };
+
+      document.getElementById("quiz-badge").textContent = config.badge;
+      document.getElementById("quiz-title").textContent = config.title;
+      document.getElementById("quiz-subtitle").textContent = config.subtitle;
+      document.getElementById("quiz-timer").textContent = formatTime(config.durationSeconds);
+
+      appState.activeQuiz.timerInterval = setInterval(() => {
+        if (!appState.activeQuiz) return;
+        appState.activeQuiz.timeRemaining = Math.max(0, appState.activeQuiz.timeRemaining - 1);
+        const timerEl = document.getElementById("quiz-timer");
+        if (timerEl) timerEl.textContent = formatTime(appState.activeQuiz.timeRemaining);
+        if (appState.activeQuiz.timeRemaining <= 0) {
+          clearQuizTimer();
+          showToast("زمان آزمون به پایان رسید! کارنامه شما صادر شد.", "⏰");
+          finishActiveQuiz();
+        }
+      }, 1000);
+
+      renderCurrentQuestion();
+      switchView("quiz");
+    }
+
+    function renderCurrentQuestion() {
+      const quiz = appState.activeQuiz;
+      if (!quiz) return;
+
+      const idx = quiz.currentIndex;
+      const total = quiz.questions.length;
+      const item = quiz.questions[idx];
+      const selectedOpt = quiz.userAnswers[idx];
+      const isPracticeRevealed = appState.examMode === "practice" && quiz.revealedMap[idx];
+
+      document.getElementById("quiz-progress-label").textContent = `سوال ${idx + 1} از ${total}`;
+      const answeredCount = quiz.userAnswers.filter(a => a !== null).length;
+      document.getElementById("quiz-answered-count").textContent = `پاسخ داده شده: ${answeredCount} از ${total}`;
+      document.getElementById("quiz-progress-bar").style.width = `${Math.round(((idx + 1) / total) * 100)}%`;
+
+      // Category & difficulty tags
+      const catTag = document.getElementById("question-category-tag");
+      catTag.textContent = item.badgeRef ? `${item.badgeRef} | ${item.category}` : item.category;
+      document.getElementById("question-difficulty-tag").textContent = `سطح: ${item.difficulty}`;
+
+      document.getElementById("question-text").textContent = `${idx + 1}. ${item.q}`;
+
+      // Render Question Pills
+      const pillsContainer = document.getElementById("quiz-question-pills");
+      let pillsHtml = "";
+      for (let i = 0; i < total; i++) {
+        const isCurrent = i === idx;
+        const ans = quiz.userAnswers[i];
+        let pillClass = "bg-slate-100 text-slate-600 border-slate-200";
+        if (isCurrent) {
+          pillClass = "bg-brand-900 text-white border-brand-900 ring-2 ring-amber-400";
+        } else if (ans !== null) {
+          if (appState.examMode === "practice" && quiz.revealedMap[i]) {
+            pillClass = ans === quiz.questions[i].answer
+              ? "bg-emerald-100 text-emerald-800 border-emerald-300"
+              : "bg-rose-100 text-rose-800 border-rose-300";
+          } else {
+            pillClass = "bg-teal-100 text-teal-800 border-teal-300";
+          }
+        }
+        pillsHtml += `<button type="button" data-jump-idx="${i}" class="w-7 h-7 rounded-lg text-xs font-extrabold border transition ${pillClass}">${i + 1}</button>`;
+      }
+      pillsContainer.innerHTML = pillsHtml;
+      pillsContainer.querySelectorAll("[data-jump-idx]").forEach(btn => {
+        btn.addEventListener("click", () => {
+          quiz.currentIndex = parseInt(btn.getAttribute("data-jump-idx"), 10);
+          renderCurrentQuestion();
+        });
+      });
+
+      // Render 4 Options
+      const optionsContainer = document.getElementById("options-container");
+      const labels = ["الف", "ب", "ج", "د"];
+      let optsHtml = "";
+
+      item.options.forEach((optText, optIdx) => {
+        const isSelected = selectedOpt === optIdx;
+        const isCorrect = optIdx === item.answer;
+
+        let cardStyle = "border-slate-200 bg-white text-slate-800";
+        let badgeStyle = "bg-slate-100 text-slate-700";
+        let statusIcon = "";
+
+        if (isPracticeRevealed) {
+          if (isCorrect) {
+            cardStyle = "border-emerald-500 bg-emerald-50/90 text-emerald-950 font-bold";
+            badgeStyle = "bg-emerald-600 text-white";
+            statusIcon = `<span class="text-emerald-600 font-extrabold text-xs shrink-0">✓ پاسخ صحیح</span>`;
+          } else if (isSelected && !isCorrect) {
+            cardStyle = "border-rose-400 bg-rose-50/90 text-rose-950";
+            badgeStyle = "bg-rose-600 text-white";
+            statusIcon = `<span class="text-rose-600 font-extrabold text-xs shrink-0">✗ انتخاب شما</span>`;
+          }
+        } else if (isSelected) {
+          cardStyle = "border-teal-600 bg-teal-50/70 text-teal-950 font-bold ring-2 ring-teal-500/30";
+          badgeStyle = "bg-teal-700 text-white";
+          statusIcon = `<span class="text-teal-700 font-extrabold text-xs shrink-0">انتخاب شده</span>`;
+        }
+
+        optsHtml += `
+          <button type="button" data-opt-idx="${optIdx}" class="option-btn w-full text-right p-4 rounded-2xl border-2 flex items-start justify-between gap-3 ${cardStyle}">
+            <div class="flex items-start gap-3">
+              <span class="w-7 h-7 rounded-lg font-extrabold text-xs flex items-center justify-center shrink-0 mt-0.5 ${badgeStyle}">${labels[optIdx]}</span>
+              <span class="text-xs sm:text-sm leading-relaxed text-justify">${optText}</span>
+            </div>
+            ${statusIcon}
+          </button>
+        `;
+      });
+
+      optionsContainer.innerHTML = optsHtml;
+      optionsContainer.querySelectorAll("[data-opt-idx]").forEach(btn => {
+        btn.addEventListener("click", () => {
+          const chosen = parseInt(btn.getAttribute("data-opt-idx"), 10);
+          handleOptionSelect(chosen);
+        });
+      });
+
+      // Explanation box in practice mode
+      const expBox = document.getElementById("instant-explanation-box");
+      const expText = document.getElementById("instant-explanation-text");
+      const feedbackTitle = document.getElementById("instant-feedback-title");
+      const feedbackIcon = document.getElementById("instant-feedback-icon");
+
+      if (isPracticeRevealed) {
+        expBox.classList.remove("hidden");
+        expText.textContent = item.explanation;
+        if (selectedOpt === item.answer) {
+          feedbackIcon.textContent = "🎯";
+          feedbackTitle.textContent = "آفرین! پاسخ شما کاملاً صحیح است — تحلیل تشریحی:";
+        } else {
+          feedbackIcon.textContent = "💡";
+          feedbackTitle.textContent = "پاسخ صحیح گزینه «" + labels[item.answer] + "» است — نکته آموزشی را مرور کنید:";
+        }
+      } else {
+        expBox.classList.add("hidden");
+      }
+
+      // Prev / Next button states
+      const prevBtn = document.getElementById("prev-question-btn");
+      const nextBtn = document.getElementById("next-question-btn");
+      prevBtn.disabled = idx === 0;
+      if (idx === total - 1) {
+        nextBtn.classList.add("hidden");
+      } else {
+        nextBtn.classList.remove("hidden");
+      }
+    }
+
+    function handleOptionSelect(chosenIdx) {
+      const quiz = appState.activeQuiz;
+      if (!quiz) return;
+      quiz.userAnswers[quiz.currentIndex] = chosenIdx;
+      if (appState.examMode === "practice") {
+        quiz.revealedMap[quiz.currentIndex] = true;
+      }
+      renderCurrentQuestion();
+    }
+
+    function finishActiveQuiz() {
+      const quiz = appState.activeQuiz;
+      if (!quiz) return;
+      clearQuizTimer();
+
+      const total = quiz.questions.length;
+      let correct = 0;
+      let wrong = 0;
+      let unanswered = 0;
+
+      quiz.questions.forEach((q, i) => {
+        const u = quiz.userAnswers[i];
+        if (u === null) unanswered++;
+        else if (u === q.answer) correct++;
+        else wrong++;
+      });
+
+      const percent = Math.round((correct / total) * 100);
+      const score20 = ((correct / total) * 20).toFixed(1).replace(".0", "");
+      const timeSpent = Math.max(1, quiz.durationSeconds - quiz.timeRemaining);
+
+      // Update saved progress
+      const prevRec = appState.savedProgress[quiz.key];
+      const bestPercent = prevRec ? Math.max(prevRec.bestPercent, percent) : percent;
+      const bestScore20 = prevRec ? Math.max(parseFloat(prevRec.bestScore20), parseFloat(score20)) : score20;
+
+      appState.savedProgress[quiz.key] = {
+        bestPercent,
+        bestScore20,
+        lastPercent: percent,
+        lastScore20: score20
+      };
+      saveProgressToStorage();
+      updateDashboardStats();
+      renderLessonsGrid();
+
+      // Populate Results View
+      document.getElementById("result-exam-title").textContent = `کارنامه ${quiz.title}`;
+      const displayName = appState.studentName || "پژوهشگر گرامی";
+      document.getElementById("result-student-name").textContent = `دانش‌آموز: ${displayName}  |  طراح و تنظیم‌کننده: استاد علی حاجیان`;
+
+      const rankBadge = document.getElementById("result-rank-badge");
+      if (percent >= 90) {
+        rankBadge.textContent = "درجه علمی: ممتاز (نخبه المپیادی و تیزهوشان) 🌟🏆";
+        rankBadge.className = "inline-block mt-2 text-xs sm:text-sm font-extrabold px-4 py-1.5 rounded-xl bg-emerald-100 text-emerald-900 border border-emerald-300";
+      } else if (percent >= 70) {
+        rankBadge.textContent = "درجه علمی: خیلی خوب (تسلط بالا بر مفاهیم) 👏✨";
+        rankBadge.className = "inline-block mt-2 text-xs sm:text-sm font-extrabold px-4 py-1.5 rounded-xl bg-teal-100 text-teal-900 border border-teal-300";
+      } else if (percent >= 50) {
+        rankBadge.textContent = "درجه علمی: قابل قبول (نیازمند مرور نکات فقهی و تشریحی) 📖";
+        rankBadge.className = "inline-block mt-2 text-xs sm:text-sm font-extrabold px-4 py-1.5 rounded-xl bg-amber-100 text-amber-900 border border-amber-300";
+      } else {
+        rankBadge.textContent = "درجه علمی: نیازمند مطالعه مجدد جزوه و تلاش بیشتر 💪";
+        rankBadge.className = "inline-block mt-2 text-xs sm:text-sm font-extrabold px-4 py-1.5 rounded-xl bg-rose-100 text-rose-900 border border-rose-300";
+      }
+
+      document.getElementById("result-score-percent").textContent = `${percent}%`;
+      document.getElementById("result-score-twenty").textContent = `نمره: ${score20} از ۲۰`;
+      document.getElementById("result-correct-count").textContent = String(correct);
+      document.getElementById("result-wrong-count").textContent = String(wrong);
+      document.getElementById("result-unanswered-count").textContent = String(unanswered);
+      document.getElementById("result-time-spent").textContent = formatTime(timeSpent);
+
+      // Build Detailed Review List
+      const labels = ["الف", "ب", "ج", "د"];
+      const reviewList = document.getElementById("detailed-review-list");
+      let revHtml = "";
+
+      quiz.questions.forEach((q, i) => {
+        const u = quiz.userAnswers[i];
+        const isCorrect = u === q.answer;
+        const isBlank = u === null;
+
+        let borderClass = isCorrect ? "border-emerald-300 bg-emerald-50/30" : (isBlank ? "border-slate-300 bg-slate-50" : "border-rose-300 bg-rose-50/30");
+        let statusPill = isCorrect
+          ? `<span class="text-xs font-extrabold px-2.5 py-1 rounded-lg bg-emerald-100 text-emerald-800">✓ پاسخ صحیح</span>`
+          : (isBlank
+              ? `<span class="text-xs font-extrabold px-2.5 py-1 rounded-lg bg-slate-200 text-slate-700">⚪ بدون پاسخ</span>`
+              : `<span class="text-xs font-extrabold px-2.5 py-1 rounded-lg bg-rose-100 text-rose-800">✗ پاسخ نادرست</span>`);
+
+        revHtml += `
+          <div class="p-4 sm:p-5 rounded-2xl border ${borderClass} space-y-3">
+            <div class="flex items-center justify-between gap-2 flex-wrap">
+              <span class="text-xs font-bold text-slate-500">سوال ${i + 1} (${q.category})</span>
+              ${statusPill}
+            </div>
+            <p class="text-sm font-extrabold text-slate-900 leading-relaxed text-justify">${q.q}</p>
+            <div class="text-xs space-y-1.5 pt-1">
+              <p class="text-emerald-800 font-bold">✅ گزینه صحیح (${labels[q.answer]}): ${q.options[q.answer]}</p>
+              ${!isCorrect && !isBlank ? `<p class="text-rose-700 font-semibold">❌ انتخاب شما (${labels[u]}): ${q.options[u]}</p>` : ""}
+            </div>
+            <div class="p-3 rounded-xl bg-white border border-slate-200/80 text-xs text-slate-700 leading-relaxed text-justify">
+              <strong class="text-teal-800">💡 تحلیل تشریحی:</strong> ${q.explanation}
+            </div>
+          </div>
+        `;
+      });
+
+      reviewList.innerHTML = revHtml;
+      switchView("results");
+    }
+
+    function copyTextToClipboard(text, successMsg) {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(() => {
+          showToast(successMsg, "📋");
+        }).catch(() => {
+          fallbackCopy(text, successMsg);
+        });
+      } else {
+        fallbackCopy(text, successMsg);
+      }
+    }
+
+    function fallbackCopy(text, successMsg) {
+      const ta = document.createElement("textarea");
+      ta.value = text;
+      document.body.appendChild(ta);
+      ta.select();
+      try {
+        document.execCommand("copy");
+        showToast(successMsg, "📋");
+      } catch (e) {
+        showToast("امکان کپی خودکار وجود نداشت.", "⚠️");
+      }
+      document.body.removeChild(ta);
+    }
+
+    // Wire All Static Controls on DOMContentLoaded
+    window.addEventListener("DOMContentLoaded", () => {
+      loadSavedProgress();
+      updateDashboardStats();
+      renderLessonsGrid();
+
+      // Top Nav Buttons
+      document.getElementById("nav-dashboard-btn").addEventListener("click", () => {
+        clearQuizTimer();
+        switchView("dashboard");
+      });
+      document.getElementById("nav-comprehensive-btn").addEventListener("click", () => {
+        startComprehensiveQuiz();
+      });
+      document.getElementById("nav-github-btn").addEventListener("click", () => {
+        clearQuizTimer();
+        switchView("github");
+      });
+      document.getElementById("close-github-view-btn").addEventListener("click", () => {
+        switchView("dashboard");
+      });
+
+      // Dashboard Hero & Filter Controls
+      document.getElementById("start-random-comprehensive-btn").addEventListener("click", () => {
+        startComprehensiveQuiz();
+      });
+
+      document.getElementById("student-name-input").addEventListener("input", (e) => {
+        appState.studentName = e.target.value.trim();
+        saveProgressToStorage();
+      });
+
+      document.getElementById("exam-mode-select").addEventListener("change", (e) => {
+        appState.examMode = e.target.value;
+      });
+
+      document.querySelectorAll(".filter-tab-btn").forEach(btn => {
+        btn.addEventListener("click", () => {
+          appState.filter = btn.getAttribute("data-filter");
+          document.querySelectorAll(".filter-tab-btn").forEach(b => {
+            b.className = "filter-tab-btn px-3 py-1.5 rounded-xl text-xs font-bold bg-slate-100 text-slate-700 hover:bg-slate-200 transition";
+          });
+          btn.className = "filter-tab-btn px-3 py-1.5 rounded-xl text-xs font-bold bg-brand-900 text-white transition";
+          renderLessonsGrid();
+        });
+      });
+
+      document.getElementById("search-lesson-input").addEventListener("input", (e) => {
+        appState.searchQuery = e.target.value;
+        renderLessonsGrid();
+      });
+
+      document.getElementById("reset-progress-btn").addEventListener("click", () => {
+        appState.savedProgress = {};
+        saveProgressToStorage();
+        updateDashboardStats();
+        renderLessonsGrid();
+        showToast("سوابق کارنامه‌ها با موفقیت پاکسازی شد.", "🗑️");
+      });
+
+      // Active Quiz Controls
+      document.getElementById("quit-quiz-btn").addEventListener("click", () => {
+        clearQuizTimer();
+        switchView("dashboard");
+      });
+
+      document.getElementById("prev-question-btn").addEventListener("click", () => {
+        if (appState.activeQuiz && appState.activeQuiz.currentIndex > 0) {
+          appState.activeQuiz.currentIndex--;
+          renderCurrentQuestion();
+        }
+      });
+
+      document.getElementById("next-question-btn").addEventListener("click", () => {
+        if (appState.activeQuiz && appState.activeQuiz.currentIndex < appState.activeQuiz.questions.length - 1) {
+          appState.activeQuiz.currentIndex++;
+          renderCurrentQuestion();
+        }
+      });
+
+      document.getElementById("finish-quiz-btn").addEventListener("click", () => {
+        finishActiveQuiz();
+      });
+
+      // Results View Controls
+      document.getElementById("retry-quiz-btn").addEventListener("click", () => {
+        if (!appState.activeQuiz) return;
+        if (appState.activeQuiz.key === "comprehensive") {
+          startComprehensiveQuiz();
+        } else {
+          const id = parseInt(appState.activeQuiz.key.replace("lesson_", ""), 10);
+          startLessonQuiz(id);
+        }
+      });
+
+      document.getElementById("back-to-dashboard-btn").addEventListener("click", () => {
+        switchView("dashboard");
+      });
+
+      document.getElementById("copy-report-btn").addEventListener("click", () => {
+        const title = document.getElementById("result-exam-title").textContent;
+        const name = appState.studentName || "پژوهشگر گرامی";
+        const pct = document.getElementById("result-score-percent").textContent;
+        const s20 = document.getElementById("result-score-twenty").textContent;
+        const corr = document.getElementById("result-correct-count").textContent;
+        const wrg = document.getElementById("result-wrong-count").textContent;
+        const reportText = `📊 ${title}\n👤 دانش‌آموز: ${name}\n🎯 درصد: ${pct} (${s20})\n✅ صحیح: ${corr} | ❌ نادرست: ${wrg}\n✨ سامانه آزمون تیزهوشان «از من تا خدا» (تهیه و تنظیم: علی حاجیان)`;
+        copyTextToClipboard(reportText, "متن کارنامه در حافظه کپی شد!");
+      });
+
+      document.getElementById("copy-git-commands-btn").addEventListener("click", () => {
+        const gitText = document.getElementById("git-commands-block").textContent;
+        copyTextToClipboard(gitText, "لینک‌ها کپی شد!");
+      });
+    });
+  </script>
+</body>
+</html>
